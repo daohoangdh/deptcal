@@ -1,1 +1,175 @@
-hello world
+<html>
+<title>Bảng tính cầm đồ Hoàng Chiều</title>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
+<style>
+body{
+  background:#fff;
+  font-family:Arial;
+}
+#maindiv{
+  margin:0 auto;
+  padding:10px;
+  max-width:400px;
+  background:#33cc33;
+  font-size:18px;
+}
+#maindiv .h1{
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+}
+#maindiv input{
+  font-size:20px;
+  width:100%;
+  border:0;
+  margin-bottom:10px;
+}
+#today{
+  text-align:center;
+  margin-top:-10px;
+}
+#maindiv .info{
+  background:#00ccff;
+  text-align:center;
+  font-weight:bold;
+  
+}
+#maindiv .note{
+  font-size:15px;
+  margin-top:10px;
+}
+</style>
+</head>
+<body>
+<div id="maindiv">
+  <p class="h1">BẢNG TÍNH CẦM ĐỒ HOÀNG CHIỀU</p>
+  <input id="today" disabled></input><br>
+Số tiền cầm: 
+<span id="sotienvay"></span><br>
+<input id="sotien" value="0"></input><br>
+Số ngày cầm: <input id="countday" value="1"></input><br>
+Cầm đến ngày :<input id="newday"></input><br>
+<div class="info">
+Tiền cầm đồ: <span id="sotienvay2"></span><br>
+Phí dịch vụ: <span id="catlai"></span><br>
+Tiền nhận được: <span id="tiennhanduoc"></span><br>
+Ngày vay: <span id="ifngayvay"></span><br>
+Hạn lấy đồ : <span id="hanlaydo"></span><br>
+</div>
+<div class="note">
+Ghi chú:<br>
+Dưới 1 triệu thời hạn dưới 10 ngày phí 50.000<br>
+Dưới 1 triệu thời hạn trên 10 ngày phí 5000/tr/ngày<br>
+Từ 1 triệu - 2 triệu thời hạn dưới 10 ngày phí 100.000 đ<br>
+Từ 1 triệu - 2 triệu thời hạn trên 10 ngày phí 4500/tr/ngày<br>
+Từ 2 triệu - 4 triệu thời hạn dưới 10 ngày phí 150.000 đ<br>
+Từ 2 triệu - 4 triệu thời hạn trên 10 ngày phí 4000/tr/ngày<br>
+Từ 4 triệu - 6 triệu thời hạn dưới 10 ngày phí 200.000 đ<br>
+Từ 4 triệu - 6 triệu thời hạn trên 10 ngày phí 3500/tr/ngày<br>
+Trên 6 triệu thời hạn dưới 10 ngày phí 5000/tr/ngày<br>
+Trên 6 triệu thời hạn trên 10 ngày phí 3000/tr/ngày<br>
+</div>
+</div>
+<script>
+var now = dayjs().format('DD/MM/YYYY');
+document.getElementById("today").value = now;
+document.getElementById("hanlaydo").innerHTML = now;
+document.getElementById("ifngayvay").innerHTML = now;
+document.getElementById("newday").value = now;
+//end of set normal view
+//begin countday
+function demngay(){
+  var daynow = dayjs().format('YYYY-MM-DD');
+  var daytocount = document.getElementById("newday").value;
+  var dmy = daytocount.split('/');
+  var newdmy = new Date(dmy[2],dmy[1]-1,dmy[0]);
+  const date1 = dayjs(newdmy);
+  var haha = date1.diff(daynow, 'day');
+  document.getElementById("countday").value = haha;                   ///////update daycount
+  document.getElementById("hanlaydo").innerHTML = document.getElementById("newday").value;
+}
+document.getElementById("newday").addEventListener("input", demngay); //// if input date
+//begin function plusday
+function plusday(){
+  var newcday = document.getElementById("countday").value;
+  var newday = dayjs().add(newcday, 'day').format('DD/MM/YYYY');
+  document.getElementById("newday").value = newday;  
+  document.getElementById("hanlaydo").innerHTML = newday;  //////update newday
+}
+document.getElementById("countday").addEventListener("input", plusday); /// if input countday
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function tinhlai(){
+  var sotien = document.getElementById("sotien").value;
+  var songay = document.getElementById("countday").value;
+  if (sotien <= 1000000 && songay <= 10){                                           //////loai vay 1
+      var phaitra = sotien - 50000;
+          document.getElementById('catlai').innerHTML = '50,000';
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }if(sotien <= 1000000 && songay > 10){
+    var catlai = 5000*songay;
+    var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }if(sotien > 1000000 && sotien <= 2000000 && songay <= 10){                              ///muc vay 2
+     var phaitra = sotien - 100000;
+          document.getElementById('catlai').innerHTML = '100,000';
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 1000000 && sotien <= 2000000 && songay > 10){
+     var catlai = (4500*sotien/1000000)*songay;
+    var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 2000000 && sotien <= 4000000 && songay <= 10){                                 ///muc vay 3
+     var phaitra = sotien - 150000;
+          document.getElementById('catlai').innerHTML = '150,000';
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 2000000 && sotien <= 4000000 && songay > 10){
+     var catlai = (4000*sotien/1000000)*songay;
+    var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 4000000 && sotien <= 6000000 && songay <= 10){                                 ///muc vay 4
+     var phaitra = sotien - 200000;
+          document.getElementById('catlai').innerHTML = '200,000';
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 4000000 && sotien <= 6000000 && songay > 10){
+     var catlai = (3500*sotien/1000000)*songay;
+    var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 6000000 && songay <= 10){                                 ///muc vay 5
+     var catlai = (5000*sotien/1000000)*songay;
+     var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+  if(sotien > 6000000 && songay > 10){
+     var catlai = (3000*sotien/1000000)*songay;
+    var phaitra = sotien - catlai;
+          document.getElementById('catlai').innerHTML = numberWithCommas(catlai);
+          document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
+  }
+}
+
+
+function sotienvayf(){
+  var sotienvay = document.getElementById('sotien').value;
+            document.getElementById('sotienvay').innerHTML = numberWithCommas(sotienvay);
+  document.getElementById('sotienvay2').innerHTML = numberWithCommas(sotienvay);
+}
+document.getElementById("sotien").addEventListener("input", tinhlai); /// if input sotien
+document.getElementById("sotien").addEventListener("input", sotienvayf); /// if input sotien
+document.getElementById("countday").addEventListener("input", tinhlai); /// if input sotien
+
+</script>
+</body>
