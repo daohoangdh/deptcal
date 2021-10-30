@@ -92,6 +92,36 @@
             font-weight: bold;
             font-size: 13px;
         }
+        .red{
+            background: #dd0808;
+        }
+        .green{
+            background: #007605;
+        }
+        .holdethprice{
+            display: flex;
+            width: 100%;
+            min-height: 50px;
+            justify-content: center;
+        }
+        #ethprice{
+            font-weight: bold;
+            font-size: 25px;
+            text-align: center;
+            padding:10px;
+            display: inline-block;
+        }
+        #giamuonban{
+            display: none;
+        }
+        #giamuonban2{
+            width: 60px;
+            padding: 5px;
+            margin-top: 15px;
+        }
+        .sauheadtext{
+            padding:10px 0;
+        }
     </style>
 </head>
 
@@ -103,17 +133,20 @@
     Giá mua vào <input type="number" class="inputgia" id="giamua">
 
     </div>
-    <div class="trigia">
-    <div id="showgiavnd"></div>
-    <div class="showtigia">Tỉ giá: <input type="number" class="inputvua" id="tigia" value="22680"></div>
-</div>
+ <div class="sauheadtext">
+    Tỉ giá: <input type="number" class="inputvua" id="tigia" value="22680">
+    Sell Fee <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
+    Buy Fee <input id="phibanra" class="inputbe" type="number" value="0.1"></td>
+ </div>
+   
 </div>
     
     
     <table>
         <tr>
-            <td><span class="textbold">TAKE PROFIT  </span><input id="dutinhban" type="number" value="1" class="inputbe"> Stop Loss <input id="dutinhcatlo" type="number" value="0.8" class="inputbe"> Fee <input id="phibanra" class="inputbe" type="number" value="0.1"></td>
-        </tr>
+            <td><span class="textbold">TAKE PROFIT  </span><input id="dutinhban" type="number" value="1" class="inputbe"> Stop Loss <input id="dutinhcatlo" type="number" value="0.8" class="inputbe">
+        </td>
+            </tr>
         <tr>
             <td>
                 <table class="giaban">
@@ -158,31 +191,70 @@
     
         </tr>
     </table>
+    <div class="holdethprice">
+        <div id="ethprice"></div>
+    </div>
+
+</div>
+ <input id="giamuonban" type="number" value="1" class="giamuonban">
     
-    Nhap gia ban ra<input id="giamuonban" type="number" value="1" class="inputbe">
-    <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
-    
-    <table>
+    <table id="livecal">
     <tr>
-        <td>Chenh lech gia</td>
-       <td>Loi nhuan sau ban %</td>
-       <td>loi nhuan sau ban tri gia</td>
-       <td>Tong tai san</td>
-    
-       <td>Loi nhuan vnd</td>
-       <td>Tong tai san vnd</td>
+        <td class="head">Value</td>
+       <td class="head middle">Profit %</td>
+       <td class="head end">Profit $</td>
     </tr>
     <tr>
         <td><div id="chenhlechgiaban" class="showgia"></div></td>
-        <td><div id="loinhuangiamuonbanphantram" class="showgia"></div></td>
-        <td><div id="loinhuangiamuonban" class="showgia"></div></td>
-        <td><div id="tongtaisansaumuonban" class="showgia"></div></td>
-        <td><div id="loinhuangiamuonbanvnd" class="showgia"></div></td>
-        <td><div id="tongtaisansaumuonbanvnd" class="showgia"></div></td>
+        <td class="middle"><div id="loinhuangiamuonbanphantram" class="showgia"></div></td>
+        <td class="end"><div id="loinhuangiamuonban" class="showgia"></div></td>
+      
+    </tr>
+  
+    <tr>
+        <td class="head">Total</td>
+        <td class="head middle">Profit VND</td>
+        <td class="head end">Total VND</td>
+        </tr>
+        <tr>
+            <td><div id="tongtaisansaumuonban" class="showgia"></div></td>
+            <td class="middle"><div id="loinhuangiamuonbanvnd" class="showgia"></div></td>
+            <td class="end"><div id="tongtaisansaumuonbanvnd" class="showgia"></div></td>       
     </tr>
     </table>
     
-    
+
+
+
+
+    <input id="giamuonban2" type="number" value="1" class="giamuonban">
+
+
+    <table id="livecal2">
+        <tr>
+            <td class="head">Value</td>
+           <td class="head middle">Profit %</td>
+           <td class="head end">Profit $</td>
+        </tr>
+        <tr>
+            <td><div id="chenhlechgiaban2" class="showgia"></div></td>
+            <td class="middle"><div id="loinhuangiamuonbanphantram2" class="showgia"></div></td>
+            <td class="end"><div id="loinhuangiamuonban2" class="showgia"></div></td>
+          
+        </tr>
+      
+        <tr>
+            <td class="head">Total</td>
+            <td class="head middle">Profit VND</td>
+            <td class="head end">Total VND</td>
+            </tr>
+            <tr>
+                <td><div id="tongtaisansaumuonban2" class="showgia"></div></td>
+                <td class="middle"><div id="loinhuangiamuonbanvnd2" class="showgia"></div></td>
+                <td class="end"><div id="tongtaisansaumuonbanvnd2" class="showgia"></div></td>       
+        </tr>
+        </table>
+        
     
     
     <script>
@@ -193,8 +265,7 @@
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
         var tigia = document.getElementById("tigia").valueAsNumber;   
-        var vnd = taisan * tigia;
-        document.getElementById('showgiavnd').innerHTML = numberWithCommas(vnd);
+ 
         var phibanra = document.getElementById("phibanra").valueAsNumber;   
     
         var giamua = document.getElementById("giamua").valueAsNumber;
@@ -223,13 +294,27 @@
     
     
     
-    
-    
+    }
+    function livecal(){
+
+        var taisan = document.getElementById("taisandangco").valueAsNumber;   
+        var giamua = document.getElementById("giamua").valueAsNumber;
+        var tigia = document.getElementById("tigia").valueAsNumber;   
+
+
         var giamuonban = document.getElementById("giamuonban").valueAsNumber;
         var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
         var chenhlechgiaban = giamuonban - giamua;
-        document.getElementById('chenhlechgiaban').innerHTML = chenhlechgiaban;
+        document.getElementById('chenhlechgiaban').innerHTML = chenhlechgiaban.toFixed(2);
         var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban;
+        if (loinhuangiamuonbanphantram > 0){
+            document.getElementById("livecal").className = "green";
+        }
+        if (loinhuangiamuonbanphantram < 0){
+            document.getElementById("livecal").className = "red";
+        }
+
+
         document.getElementById('loinhuangiamuonbanphantram').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="percent">%</span>';
         var loinhuangiamuonban = taisan * loinhuangiamuonbanphantram/100;
         document.getElementById('loinhuangiamuonban').innerHTML = loinhuangiamuonban.toFixed(2);
@@ -239,17 +324,46 @@
         document.getElementById('tongtaisansaumuonban').innerHTML = tongtaisansaumuonban.toFixed(2);
         var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
         document.getElementById('tongtaisansaumuonbanvnd').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
-    
-              //document.getElementById('tiennhanduoc').innerHTML = numberWithCommas(phaitra);
-             // document.getElementById('catlainot').innerHTML = '<small>Phí cố định<small>';
-    
-    
-    
+
     }
     
+    function nhapban(){
+
+var taisan = document.getElementById("taisandangco").valueAsNumber;   
+var giamua = document.getElementById("giamua").valueAsNumber;
+var tigia = document.getElementById("tigia").valueAsNumber;   
+
+
+var giamuonban = document.getElementById("giamuonban2").valueAsNumber;
+var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
+var chenhlechgiaban = giamuonban - giamua;
+document.getElementById('chenhlechgiaban2').innerHTML = chenhlechgiaban.toFixed(2);
+var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban;
+if (loinhuangiamuonbanphantram > 0){
+    document.getElementById("livecal2").className = "green";
+}
+if (loinhuangiamuonbanphantram < 0){
+    document.getElementById("livecal2").className = "red";
+}
+
+
+document.getElementById('loinhuangiamuonbanphantram2').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="percent">%</span>';
+var loinhuangiamuonban = taisan * loinhuangiamuonbanphantram/100;
+document.getElementById('loinhuangiamuonban2').innerHTML = loinhuangiamuonban.toFixed(2);
+var loinhuangiamuonbanvnd = loinhuangiamuonban * tigia;
+document.getElementById('loinhuangiamuonbanvnd2').innerHTML = numberWithCommas(loinhuangiamuonbanvnd.toFixed());
+var tongtaisansaumuonban = taisan + loinhuangiamuonban;
+document.getElementById('tongtaisansaumuonban2').innerHTML = tongtaisansaumuonban.toFixed(2);
+var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
+document.getElementById('tongtaisansaumuonbanvnd2').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
+
+}
+
+
+
     document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
-    document.getElementById("giamuonban").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("giamuonban2").addEventListener("input", nhapban); /// if input sotien
     
 
 
@@ -257,10 +371,27 @@
 
     </script>
 <script>
+    let etherprice = document.getElementById("ethprice");
+    let giamuonban = document.getElementById("giamuonban");
+    let ws = new WebSocket('wss://stream.binance.com:9443/ws/ethusdt@trade')
+    let lastPrice = null;
 
-let ws = new WebSocket('wss://stream.binance.com:9443/ws/etheeur@trade')
     ws.onmessage = (event) => {
-        console.log(event.data);
+        let stockObject = JSON.parse(event.data);
+        let ethval = stockObject.p;
+        let price = parseFloat(ethval).toFixed(2);
+
+        etherprice.innerHTML = price;   
+        if (price > lastPrice){
+            etherprice.className = "green";
+        }
+        if (price < lastPrice){
+            etherprice.className = "red";
+        }
+        lastPrice = price;
+
+        giamuonban.value = ethval;
+        livecal();
     }
 </script>
 </body>
