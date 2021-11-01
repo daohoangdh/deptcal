@@ -278,11 +278,14 @@
                     setCookie('tigia', tigia , '365');
         
         var phibanra = document.getElementById("phibanra").valueAsNumber;   
-        
+                                     setCookie('phibanra', phibanra , '365');
+
         var giamua = document.getElementById("giamua").valueAsNumber;
                      setCookie('giamua', giamua , '365'); /// if input sotien
         
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
+                             setCookie('dutinhban', dtbrval , '365');
+
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
     
@@ -298,6 +301,8 @@
         
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
+                                     setCookie('dutinhcatlo', dutinhcatlo , '365');
+
         var dtcl = giamua + (giamua * -dtclval/100);
         document.getElementById('giacatlo').innerHTML = dtcl.toFixed(2);
     
@@ -408,8 +413,11 @@ function getCookie(cname) {
 document.addEventListener("DOMContentLoaded", function(event) { 
 document.getElementById("giamua").value = getCookie('giamua');
 document.getElementById("tigia").value = getCookie('tigia');
-document.getElementById("taisandangco").value = getCookie('taisandangco');
-    
+document.getElementById("taisandangco").value = getCookie('taisan');
+document.getElementById("dutinhban").value = getCookie('dutinhban');
+document.getElementById("dutinhcatlo").value = getCookie('dutinhcatlo');
+document.getElementById("phibanra").value = getCookie('phibanra');
+document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');
 });
 
     document.getElementById("giamua","taisandangco","tigia","phigiamuonban","phibanra").addEventListener("input", dutinhban); /// if input sotien
