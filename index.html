@@ -357,13 +357,13 @@
 var taisan = document.getElementById("taisandangco").valueAsNumber;   
 var giamua = document.getElementById("giamua").valueAsNumber;
 var tigia = document.getElementById("tigia").valueAsNumber;   
-
+var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
 
 var giamuonban = document.getElementById("giamuonban2").valueAsNumber;
 var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
 var chenhlechgiaban = giamuonban - giamua;
 document.getElementById('chenhlechgiaban2').innerHTML = chenhlechgiaban.toFixed(2);
-var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban;
+var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban - phimuavao;
 if (loinhuangiamuonbanphantram > 0){
     document.getElementById("livecal2").className = "green";
 }
@@ -419,7 +419,13 @@ document.getElementById("phimuavao").value = getCookie('phimuavao');
 document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');
 });
 
-    document.getElementById("giamua","taisandangco","tigia","phigiamuonban","phibanra","dutinhcatlo","dutinhban").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("tigia").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("phigiamuonban").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("phimuavao").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("dutinhcatlo").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("dutinhban").addEventListener("input", dutinhban); /// if input sotien
 
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
 
