@@ -145,6 +145,32 @@
  </div>
    
 </div>
+     <input id="giamuonban" type="number" value="1" class="giamuonban">
+    
+    <table id="livecal">
+    <tr>
+        <td class="head">Value</td>
+       <td class="head middle">Profit %</td>
+       <td class="head end">Profit $</td>
+    </tr>
+    <tr>
+        <td><div id="chenhlechgiaban" class="showgia"></div></td>
+        <td class="middle"><div id="loinhuangiamuonbanphantram" class="showgia"></div></td>
+        <td class="end"><div id="loinhuangiamuonban" class="showgia"></div></td>
+      
+    </tr>
+  
+    <tr>
+        <td class="head">Total</td>
+        <td class="head middle">Profit VND</td>
+        <td class="head end">Total VND</td>
+        </tr>
+        <tr>
+            <td><div id="tongtaisansaumuonban" class="showgia"></div></td>
+            <td class="middle"><div id="loinhuangiamuonbanvnd" class="showgia"></div></td>
+            <td class="end"><div id="tongtaisansaumuonbanvnd" class="showgia"></div></td>       
+    </tr>
+    </table>
     
     
     <table>
@@ -201,33 +227,7 @@
     </div>
 
 </div>
- <input id="giamuonban" type="number" value="1" class="giamuonban">
-    
-    <table id="livecal">
-    <tr>
-        <td class="head">Value</td>
-       <td class="head middle">Profit %</td>
-       <td class="head end">Profit $</td>
-    </tr>
-    <tr>
-        <td><div id="chenhlechgiaban" class="showgia"></div></td>
-        <td class="middle"><div id="loinhuangiamuonbanphantram" class="showgia"></div></td>
-        <td class="end"><div id="loinhuangiamuonban" class="showgia"></div></td>
-      
-    </tr>
-  
-    <tr>
-        <td class="head">Total</td>
-        <td class="head middle">Profit VND</td>
-        <td class="head end">Total VND</td>
-        </tr>
-        <tr>
-            <td><div id="tongtaisansaumuonban" class="showgia"></div></td>
-            <td class="middle"><div id="loinhuangiamuonbanvnd" class="showgia"></div></td>
-            <td class="end"><div id="tongtaisansaumuonbanvnd" class="showgia"></div></td>       
-    </tr>
-    </table>
-    
+
 
 
 
@@ -410,13 +410,20 @@ function getCookie(cname) {
 
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-document.getElementById("giamua").value = getCookie('giamua');
-document.getElementById("tigia").value = getCookie('tigia');
-document.getElementById("taisandangco").value = getCookie('taisan');
-document.getElementById("dutinhban").value = getCookie('dutinhban');
-document.getElementById("dutinhcatlo").value = getCookie('dutinhcatlo');
-document.getElementById("phimuavao").value = getCookie('phimuavao');
-document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');
+  let giamuac = getCookie("giamua");
+    let tigiac = getCookie("tigia");
+    let taisanc = getCookie("taisan");
+    let dutinhbanc = getCookie("dutinhban");
+    let dutinhcatloc = getCookie("dutinhcatlo");
+    let phimuavaoc = getCookie("phimuavao");
+    let phigiamuonbanc = getCookie("phigiamuonban");
+  if (giamuac != ""){document.getElementById("giamua").value = getCookie('giamua');} else {document.getElementById("giamua").value = "0";}
+  if (tigiac != ""){document.getElementById("tigia").value = getCookie('tigia');} else {document.getElementById("tigia").value = "22480";}
+  if (taisanc != ""){document.getElementById("taisandangco").value = getCookie('taisan');} else {document.getElementById("taisandangco").value = "0";}
+  if (dutinhbanc != ""){document.getElementById("dutinhban").value = getCookie('dutinhban');} else {document.getElementById("dutinhban").value = "1";}
+  if (dutinhcatlo != ""){document.getElementById("dutinhcatlo").value = getCookie('dutinhcatlo');} else {document.getElementById("dutinhcatlo").value = "0.7";}
+  if (phimuavao != ""){document.getElementById("phimuavao").value = getCookie('phimuavao');} else {document.getElementById("phimuavao").value = "0.1";}
+  if (phigiamuonban != ""){document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');} else {document.getElementById("phigiamuonban").value = "0.1";}
 });
 
     document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
