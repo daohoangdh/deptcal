@@ -266,30 +266,8 @@
        function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    function savecook(){
-        var taisan = document.getElementById("taisandangco").valueAsNumber;   
-                                setCookie('taisan', taisan , '365');
-        var tigia = document.getElementById("tigia").valueAsNumber;   
-                                setCookie('tigia', tigia , '365');
-        var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;   
-                                setCookie('phigiamuonban', phigiamuonban , '365');
-        var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
-                                setCookie('phimuavao', phimuavao , '365');
-        var giamua = document.getElementById("giamua").valueAsNumber;
-                                setCookie('giamua', giamua , '365'); 
-        var dtbrval = document.getElementById("dutinhban").valueAsNumber;
-                                setCookie('dutinhban', dtbrval , '365');
-        var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
-                                setCookie('dutinhcatlo', dtclval , '365');
-                                      
-        console.log('tai san dang co: ' + getCookie('taisan'));
-        console.log('ti gia: ' + getCookie('tigia'));
-        console.log('phi gia muon ban: ' + getCookie('phigiamuonban'));
-        console.log('phi mua vao: ' + getCookie('phimuavao'));
-        console.log('Gia mua vao: ' + getCookie('giamua'));
-        console.log('du tinh ban: ' + getCookie('dutinhban'));
-        console.log('du tinh cat lo: ' + getCookie('dutinhcatlo'));
-    }
+
+ 
     function dutinhban(){
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
@@ -320,6 +298,21 @@
         var thiethaivnd = thiethai * tigia;
         document.getElementById('thiethaivnd').innerHTML = numberWithCommas(thiethaivnd.toFixed());
     
+                                        setCookie('taisan', taisan , '365');
+                                setCookie('tigia', tigia , '365');
+                                setCookie('phigiamuonban', phigiamuonban , '365');
+                                setCookie('phimuavao', phimuavao , '365');
+                                setCookie('giamua', giamua , '365'); 
+                                setCookie('dutinhban', dtbrval , '365');
+                                setCookie('dutinhcatlo', dtclval , '365');
+                                      
+        console.log('tai san dang co: ' + getCookie('taisan'));
+        console.log('ti gia: ' + getCookie('tigia'));
+        console.log('phi gia muon ban: ' + getCookie('phigiamuonban'));
+        console.log('phi mua vao: ' + getCookie('phimuavao'));
+        console.log('Gia mua vao: ' + getCookie('giamua'));
+        console.log('du tinh ban: ' + getCookie('dutinhban'));
+        console.log('du tinh cat lo: ' + getCookie('dutinhcatlo'));
     
     
     }
