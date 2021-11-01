@@ -141,7 +141,7 @@
  <div class="sauheadtext">
     Tỉ giá: <input type="number" class="inputvua" id="tigia" value="22680">
     Sell Fee <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
-    Buy Fee <input id="phibanra" class="inputbe" type="number" value="0.1"></td>
+    Buy Fee <input id="phimuavao" class="inputbe" type="number" value="0.1"></td>
  </div>
    
 </div>
@@ -267,9 +267,6 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     function dutinhban(){
-       
-
-        
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
                             setCookie('taisan', taisan , '365');
@@ -277,9 +274,10 @@
         var tigia = document.getElementById("tigia").valueAsNumber;   
                     setCookie('tigia', tigia , '365');
         
-        var phibanra = document.getElementById("phibanra").valueAsNumber;   
-                                     setCookie('phibanra', phibanra , '365');
-
+        var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;   
+                                     setCookie('phigiamuonban', phigiamuonban , '365');
+        var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
+                                     setCookie('phimuavao', phimuavao , '365');
         var giamua = document.getElementById("giamua").valueAsNumber;
                      setCookie('giamua', giamua , '365'); /// if input sotien
         
@@ -289,24 +287,19 @@
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
     
-        var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phibanra/100);
+        var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phigiamuonban/100);
         document.getElementById('trigiasauban').innerHTML = trigiasauban.toFixed(2);
         var loinhuansauban = trigiasauban - taisan;
         document.getElementById('loinhuansauban').innerHTML = loinhuansauban.toFixed(2);
         var loinhuanvnd = loinhuansauban * tigia;
         document.getElementById('loinhuanvnd').innerHTML = numberWithCommas(loinhuanvnd.toFixed());
-    
-        
-        
-        
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
                                      setCookie('dutinhcatlo', dutinhcatlo , '365');
-
         var dtcl = giamua + (giamua * -dtclval/100);
         document.getElementById('giacatlo').innerHTML = dtcl.toFixed(2);
     
-        var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phibanra/100);
+        var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phigiamuonban/100);
         document.getElementById('trigiasaucatlo').innerHTML = trigiasaucatlo.toFixed(2);
         var thiethai = taisan - trigiasaucatlo;
         document.getElementById('thiethai').innerHTML = thiethai.toFixed(2);
@@ -325,6 +318,7 @@
 
         var giamuonban = document.getElementById("giamuonban").valueAsNumber;
         var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
+        
         var chenhlechgiaban = giamuonban - giamua;
         document.getElementById('chenhlechgiaban').innerHTML = chenhlechgiaban.toFixed(2);
         var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban;
@@ -350,6 +344,11 @@
          console.log('tai san dang co: ' + getCookie('taisan'));
         console.log('Gia mua vao: ' + getCookie('giamua'));
         console.log('tigia: ' + getCookie('tigia'));
+        console.log('dutinhban: ' + getCookie('dutinhban'));
+                console.log('phimuavao: ' + getCookie('phimuavao'));
+        console.log('phigiamuonban: ' + getCookie('phigiamuonban'));
+        console.log('tigia: ' + getCookie('tigia'));
+        console.log('dutinhcatlo: ' + getCookie('dutinhcatlo'));
         
     }
     
@@ -416,7 +415,7 @@ document.getElementById("tigia").value = getCookie('tigia');
 document.getElementById("taisandangco").value = getCookie('taisan');
 document.getElementById("dutinhban").value = getCookie('dutinhban');
 document.getElementById("dutinhcatlo").value = getCookie('dutinhcatlo');
-document.getElementById("phibanra").value = getCookie('phibanra');
+document.getElementById("phimuavao").value = getCookie('phimuavao');
 document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');
 });
 
