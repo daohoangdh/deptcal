@@ -267,22 +267,20 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     function dutinhban(){
-        console.log('tai san dang co: ' + getCookie('taisan'));
-        console.log('Gia mua vao: ' + getCookie('giamua'));
-        console.log('tigia: ' + getCookie('tigia'));
+       
 
         
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
-                            setCookie('taisan', taisan, '365');
+                            setCookie('taisan', taisan , '365');
         
         var tigia = document.getElementById("tigia").valueAsNumber;   
-                    setCookie('tigia',tigia, '365');
+                    setCookie('tigia', tigia , '365');
         
         var phibanra = document.getElementById("phibanra").valueAsNumber;   
         
         var giamua = document.getElementById("giamua").valueAsNumber;
-                     setCookie('giamua', giamua, '365'); /// if input sotien
+                     setCookie('giamua', giamua , '365'); /// if input sotien
         
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
         var dtbr = giamua + (giamua * dtbrval/100);
@@ -343,6 +341,11 @@
         var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
         document.getElementById('tongtaisansaumuonbanvnd').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
 
+        
+         console.log('tai san dang co: ' + getCookie('taisan'));
+        console.log('Gia mua vao: ' + getCookie('giamua'));
+        console.log('tigia: ' + getCookie('tigia'));
+        
     }
     
     function nhapban(){
