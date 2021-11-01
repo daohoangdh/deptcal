@@ -134,7 +134,7 @@
 
     <div class="header">BINANCE STOCK TRADE</div>
     <div class="headtext">
-    Tài sản <input type="number" class="inputvua" id="taisandangco" value="getCookie('taisandangco')">
+    Tài sản <input type="number" class="inputvua" id="taisandangco" value="100">
     Giá mua vào <input type="number" class="inputgia" id="giamua">
 
     </div>
@@ -267,6 +267,10 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     function dutinhban(){
+        console.log('tai san dang co: ' + getCookie('taisan'));
+        console.log('Gia mua vao: ' + getCookie('giamua'));
+        console.log('tigia: ' + getCookie('tigia'));
+
         
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
@@ -279,6 +283,7 @@
         
         var giamua = document.getElementById("giamua").valueAsNumber;
                      setCookie('giamua', giamua, '365'); /// if input sotien
+        
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
@@ -401,14 +406,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 document.getElementById("giamua").value = getCookie('giamua');
 document.getElementById("tigia").value = getCookie('tigia');
 document.getElementById("taisandangco").value = getCookie('taisandangco');
-    console.log(getCookie('giamua'));
-     console.log(getCookie('tigia'));
-     console.log(getCookie('taisandangco'));
+    
 });
 
-    document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("giamua","taisandangco","tigia","phigiamuonban","phibanra").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
-    document.getElementById("giamuonban2").addEventListener("input", nhapban); /// if input sotien
 
     </script>
 <script>
