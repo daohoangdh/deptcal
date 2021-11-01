@@ -134,7 +134,7 @@
 
     <div class="header">BINANCE STOCK TRADE</div>
     <div class="headtext">
-    Tài sản <input type="number" class="inputvua" id="taisandangco" value="200">
+    Tài sản <input type="number" class="inputvua" id="taisandangco" value="getCookie('taisandangco')">
     Giá mua vào <input type="number" class="inputgia" id="giamua">
 
     </div>
@@ -270,13 +270,15 @@
         
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
-                            setCookie('taisan', 'taisan', '365');
+                            setCookie('taisan', taisan, '365');
+        
         var tigia = document.getElementById("tigia").valueAsNumber;   
-                    setCookie('tigia', 'tigia', '365');
-         var phibanra = document.getElementById("phibanra").valueAsNumber;   
-    
+                    setCookie('tigia',tigia, '365');
+        
+        var phibanra = document.getElementById("phibanra").valueAsNumber;   
+        
         var giamua = document.getElementById("giamua").valueAsNumber;
-                     setCookie('giamua', 'giamua', '365'); /// if input sotien
+                     setCookie('giamua', giamua, '365'); /// if input sotien
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
