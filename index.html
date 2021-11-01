@@ -394,10 +394,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 document.getElementById("giamua").value = getCookie('giamua');
 document.getElementById("tigia").value = getCookie('tigia');
 document.getElementById("taisandangco").value = getCookie('taisandangco');
+    console.log(getCookie('giamua'));
 });
 
-    document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
-let giamuaid = document.getElementById("giamua");
+        let giamuaid = document.getElementById("giamua");
+            giamuaid.addEventListener("input", dutinhban); /// if input sotien
             giamuaid.addEventListener("input", setCookie('giamua', 'giamuaid.value', '365')); /// if input sotien
 
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
