@@ -266,28 +266,43 @@
        function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    function savecook(){
+        var taisan = document.getElementById("taisandangco").valueAsNumber;   
+                                setCookie('taisan', taisan , '365');
+        var tigia = document.getElementById("tigia").valueAsNumber;   
+                                setCookie('tigia', tigia , '365');
+        var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;   
+                                setCookie('phigiamuonban', phigiamuonban , '365');
+        var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
+                                setCookie('phimuavao', phimuavao , '365');
+        var giamua = document.getElementById("giamua").valueAsNumber;
+                                setCookie('giamua', giamua , '365'); 
+        var dtbrval = document.getElementById("dutinhban").valueAsNumber;
+                                setCookie('dutinhban', dtbrval , '365');
+        var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
+                                setCookie('dutinhcatlo', dtclval , '365');
+                                      
+        console.log('tai san dang co: ' + getCookie('taisan'));
+        console.log('ti gia: ' + getCookie('tigia'));
+        console.log('phi gia muon ban: ' + getCookie('phigiamuonban'));
+        console.log('phi mua vao: ' + getCookie('phimuavao'));
+        console.log('Gia mua vao: ' + getCookie('giamua'));
+        console.log('du tinh ban: ' + getCookie('dutinhban'));
+        console.log('du tinh cat lo: ' + getCookie('dutinhcatlo'));
+    }
     function dutinhban(){
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
-                            setCookie('taisan', taisan , '365');
-        
         var tigia = document.getElementById("tigia").valueAsNumber;   
-                    setCookie('tigia', tigia , '365');
-        
         var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;   
-                                     setCookie('phigiamuonban', phigiamuonban , '365');
         var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
-                                     setCookie('phimuavao', phimuavao , '365');
-        var giamua = document.getElementById("giamua").valueAsNumber;
-                     setCookie('giamua', giamua , '365'); /// if input sotien
-        
+        var giamua = document.getElementById("giamua").valueAsNumber;        
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
-                             setCookie('dutinhban', dtbrval , '365');
 
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
     
-        var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phigiamuonban/100);
+        var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phigiamuonban/100) - (taisan *phimuavao/100);
         document.getElementById('trigiasauban').innerHTML = trigiasauban.toFixed(2);
         var loinhuansauban = trigiasauban - taisan;
         document.getElementById('loinhuansauban').innerHTML = loinhuansauban.toFixed(2);
@@ -295,11 +310,10 @@
         document.getElementById('loinhuanvnd').innerHTML = numberWithCommas(loinhuanvnd.toFixed());
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
-                                     setCookie('dutinhcatlo', dutinhcatlo , '365');
         var dtcl = giamua + (giamua * -dtclval/100);
         document.getElementById('giacatlo').innerHTML = dtcl.toFixed(2);
     
-        var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phigiamuonban/100);
+        var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phigiamuonban/100) - (taisan *phimuavao/100);
         document.getElementById('trigiasaucatlo').innerHTML = trigiasaucatlo.toFixed(2);
         var thiethai = taisan - trigiasaucatlo;
         document.getElementById('thiethai').innerHTML = thiethai.toFixed(2);
@@ -314,6 +328,7 @@
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
         var giamua = document.getElementById("giamua").valueAsNumber;
         var tigia = document.getElementById("tigia").valueAsNumber;   
+        var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
 
 
         var giamuonban = document.getElementById("giamuonban").valueAsNumber;
@@ -321,7 +336,7 @@
         
         var chenhlechgiaban = giamuonban - giamua;
         document.getElementById('chenhlechgiaban').innerHTML = chenhlechgiaban.toFixed(2);
-        var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban;
+        var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - (phigiamuonban + phimuavao);
         if (loinhuangiamuonbanphantram > 0){
             document.getElementById("livecal").className = "green";
         }
@@ -340,15 +355,7 @@
         var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
         document.getElementById('tongtaisansaumuonbanvnd').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
 
-        
-         console.log('tai san dang co: ' + getCookie('taisan'));
-        console.log('Gia mua vao: ' + getCookie('giamua'));
-        console.log('tigia: ' + getCookie('tigia'));
-        console.log('dutinhban: ' + getCookie('dutinhban'));
-                console.log('phimuavao: ' + getCookie('phimuavao'));
-        console.log('phigiamuonban: ' + getCookie('phigiamuonban'));
-        console.log('tigia: ' + getCookie('tigia'));
-        console.log('dutinhcatlo: ' + getCookie('dutinhcatlo'));
+       
         
     }
     
@@ -419,7 +426,7 @@ document.getElementById("phimuavao").value = getCookie('phimuavao');
 document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');
 });
 
-    document.getElementById("giamua","taisandangco","tigia","phigiamuonban","phibanra","dutinhcatlo","dutinhban").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("giamua","taisandangco","tigia","phigiamuonban","phibanra","dutinhcatlo","dutinhban").addEventListener("input", dutinhban;savecook); /// if input sotien
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
 
     </script>
