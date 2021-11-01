@@ -293,13 +293,16 @@ function getCookie(cname) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     function dutinhban(){
+        
                      //gia du tinh ban ra
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
+                            setCookie('taisan', 'taisan', '365');
         var tigia = document.getElementById("tigia").valueAsNumber;   
- 
-        var phibanra = document.getElementById("phibanra").valueAsNumber;   
+                    setCookie('tigia', 'tigia', '365');
+         var phibanra = document.getElementById("phibanra").valueAsNumber;   
     
         var giamua = document.getElementById("giamua").valueAsNumber;
+                     setCookie('giamua', 'giamua', '365'); /// if input sotien
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
         var dtbr = giamua + (giamua * dtbrval/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
@@ -311,6 +314,9 @@ function getCookie(cname) {
         var loinhuanvnd = loinhuansauban * tigia;
         document.getElementById('loinhuanvnd').innerHTML = numberWithCommas(loinhuanvnd.toFixed());
     
+        
+        
+        
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
         var dtcl = giamua + (giamua * -dtclval/100);
@@ -397,10 +403,7 @@ document.getElementById("taisandangco").value = getCookie('taisandangco');
     console.log(getCookie('giamua'));
 });
 
-        let giamuaid = document.getElementById("giamua");
-            giamuaid.addEventListener("input", dutinhban); /// if input sotien
-            giamuaid.addEventListener("input", setCookie('giamua', 'giamuaid.value', '365')); /// if input sotien
-
+    document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("giamuonban2").addEventListener("input", nhapban); /// if input sotien
 
