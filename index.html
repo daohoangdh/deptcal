@@ -452,22 +452,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (cryptocheck != ""){startgame(cryptocheck);} else {startgame("wss://stream.binance.com:9443/ws/btcusdt@trade")};
     let cryptotext = getCookie('wstext');
     let cryptotextid = document.getElementById('cryptolist');
-    if (cryptotext != ""){
-        if (cryptotext === '1'){
-            cryptotextid.selectedIndex = '1';
-        }
-        if (cryptotext === '2'){
-            cryptotextid.selectedIndex = '2';
-        }
-        if (cryptotext === '3'){
-            cryptotextid.selectedIndex = '3';
-        }
-        if (cryptotext === '4'){
-            cryptotextid.selectedIndex = '4';
-        }else {
-        cryptotextid.selectedIndex = '0';}
+    if (cryptotext != ""){cryptotextid.selectedIndex = cryptotext;}else{cryptotextid.selectedIndex = '0';}
 
-};
 
   if (giamuac != ""){document.getElementById("giamua").value = giamuac;} else {document.getElementById("giamua").value = "0";}
   if (tigiac != ""){document.getElementById("tigia").value = tigiac;} else {document.getElementById("tigia").value = "22480";}
