@@ -452,8 +452,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (cryptocheck != ""){startgame(cryptocheck);} else {startgame("wss://stream.binance.com:9443/ws/btcusdt@trade")};
     let cryptotext = getCookie('wstext');
     let cryptotextid = document.getElementById('cryptolist');
-    if (cryptotext != ""){cryptotextid.selectedIndex = cryptotext;}else{cryptotextid.selectedIndex = '0';}
-
+    if (cryptotext != ""){
+        if (cryptotext === '0'){
+            cryptotextid.selectedIndex = cryptotext;
+        }
+        if (cryptotext === '1'){
+            cryptotextid.selectedIndex = cryptotext;
+        }
+        if (cryptotext === '2'){
+            cryptotextid.selectedIndex = cryptotext;
+        }
+        if (cryptotext === '3'){
+            cryptotextid.selectedIndex = cryptotext;
+        }else {
+        cryptotextid.selectedIndex = '0';
+    }
+};
 
   if (giamuac != ""){document.getElementById("giamua").value = giamuac;} else {document.getElementById("giamua").value = "0";}
   if (tigiac != ""){document.getElementById("tigia").value = tigiac;} else {document.getElementById("tigia").value = "22480";}
@@ -479,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var cryptvalue = document.getElementById("cryptolist").value;
         if (cryptvalue === "btc"){
             let ws = "wss://stream.binance.com:9443/ws/btcusdt@trade";
-            setCookie('wstext', '1' , '365');
+            setCookie('wstext', '0' , '365');
             setCookie('ws', ws , '365');
             console.log('Websocket change: ' + getCookie('ws'));
             console.log('Websocket change: ' + getCookie('wstext'));
@@ -489,7 +503,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (cryptvalue === "eth"){
             let ws = "wss://stream.binance.com:9443/ws/ethusdt@trade";
             setCookie('ws', ws , '365');
-            setCookie('wstext', '2' , '365');
+            setCookie('wstext', '1' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
             console.log('Websocket change: ' + getCookie('wstext'));
 
@@ -497,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (cryptvalue === "mana"){
             let ws = "wss://stream.binance.com:9443/ws/manausdt@trade";
             setCookie('ws', ws , '365');
-            setCookie('wstext', '3' , '365');
+            setCookie('wstext', '2' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
             console.log('Websocket change: ' + getCookie('wstext'));
 
@@ -506,7 +520,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (cryptvalue === "sand"){
             let ws = "wss://stream.binance.com:9443/ws/sandusdt@trade";
             setCookie('ws', ws , '365');
-            setCookie('wstext', '4' , '365');
+            setCookie('wstext', '3' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
             console.log('Websocket change: ' + getCookie('wstext'));
 
