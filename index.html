@@ -316,7 +316,10 @@
     
     
     }
+  
     function livecal(){
+        
+        var dutinhban = document.getElementById("dutinhban").valueAsNumber;   
 
         var taisan = document.getElementById("taisandangco").valueAsNumber;   
         var giamua = document.getElementById("giamua").valueAsNumber;
@@ -333,9 +336,18 @@
         if (loinhuangiamuonbanphantram > 0){
             document.getElementById("livecal").className = "green";
         }
+        //if (loinhuangiamuonbanphantram > dutinhban ){
+           //var audio = new Audio('https://sounds-mp3.com/mp3/0003927.mp3');
+            //audio.play();
+        //}
         if (loinhuangiamuonbanphantram < 0){
             document.getElementById("livecal").className = "red";
         }
+        //if (loinhuangiamuonbanphantram < dutinhcatlo){
+          //  var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-kids-cartoon-close-bells-2256.mp3');
+            // audio.play();
+        //}
+
 
 
         document.getElementById('loinhuangiamuonbanphantram').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="percent">%</span>';
@@ -344,6 +356,8 @@
         var loinhuangiamuonbanvnd = loinhuangiamuonban * tigia;
         document.getElementById('loinhuangiamuonbanvnd').innerHTML = numberWithCommas(loinhuangiamuonbanvnd.toFixed());
         var tongtaisansaumuonban = taisan + loinhuangiamuonban;
+        document.title =loinhuangiamuonban.toFixed(2) + " | " + numberWithCommas(loinhuangiamuonbanvnd.toFixed()) + "DHCAL";
+
         document.getElementById('tongtaisansaumuonban').innerHTML = tongtaisansaumuonban.toFixed(2);
         var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
         document.getElementById('tongtaisansaumuonbanvnd').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
@@ -435,9 +449,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("dutinhban").addEventListener("input", dutinhban); /// if input sotien
 
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
-        
-            document.getElementById("giamuonban2").addEventListener("input", nhapban); /// if input sotien
-
 
     </script>
 <script>
