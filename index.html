@@ -127,6 +127,11 @@
         #livecal tr td, #livecal2 tr td{
             width: 30%;
         }
+        #crypto{
+            align-self: flex-end;
+            flex: 1;
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -141,7 +146,18 @@
 
 </div>
       <div class="holdethprice">
-        <div id="ethprice"></div>
+        <form id="crypto">
+            <label for="cars">Crypto:</label>
+            
+            <select name="crypto" onchange="cryptochange(this)" id="cryptolist">
+              <option value="btc">BTC/USDT</option>
+              <option value="eth">ETH/USDT</option>
+              <option value="mana">MANA/USDT</option>
+              <option value="sand">SAND/USDT</option>
+            </select>
+          </form>
+          
+          <div id="ethprice"></div>
     </div>
     <table id="livecal">
     <tr>
@@ -298,7 +314,7 @@
         var thiethaivnd = thiethai * tigia;
         document.getElementById('thiethaivnd').innerHTML = numberWithCommas(thiethaivnd.toFixed());
     
-                                        setCookie('taisan', taisan , '365');
+                                setCookie('taisan', taisan , '365');
                                 setCookie('tigia', tigia , '365');
                                 setCookie('phigiamuonban', phigiamuonban , '365');
                                 setCookie('phimuavao', phimuavao , '365');
@@ -368,39 +384,39 @@
     
     function nhapban(){
 
-var taisan = document.getElementById("taisandangco").valueAsNumber;   
-var giamua = document.getElementById("giamua").valueAsNumber;
-var tigia = document.getElementById("tigia").valueAsNumber;   
-var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
+    var taisan = document.getElementById("taisandangco").valueAsNumber;   
+    var giamua = document.getElementById("giamua").valueAsNumber;
+    var tigia = document.getElementById("tigia").valueAsNumber;   
+    var phimuavao = document.getElementById("phimuavao").valueAsNumber;   
 
-var giamuonban = document.getElementById("giamuonban2").valueAsNumber;
-var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
-var chenhlechgiaban = giamuonban - giamua;
+    var giamuonban = document.getElementById("giamuonban2").valueAsNumber;
+    var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
+    var chenhlechgiaban = giamuonban - giamua;
 document.getElementById('chenhlechgiaban2').innerHTML = chenhlechgiaban.toFixed(2);
-var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban - phimuavao;
-if (loinhuangiamuonbanphantram > 0){
-    document.getElementById("livecal2").className = "green";
-}
-if (loinhuangiamuonbanphantram < 0){
-    document.getElementById("livecal2").className = "red";
-}
+    var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban - phimuavao;
+        if (loinhuangiamuonbanphantram > 0){
+            document.getElementById("livecal2").className = "green";
+        }
+        if (loinhuangiamuonbanphantram < 0){
+            document.getElementById("livecal2").className = "red";
+        }
 
 
 document.getElementById('loinhuangiamuonbanphantram2').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="percent">%</span>';
-var loinhuangiamuonban = taisan * loinhuangiamuonbanphantram/100;
+    var loinhuangiamuonban = taisan * loinhuangiamuonbanphantram/100;
 document.getElementById('loinhuangiamuonban2').innerHTML = loinhuangiamuonban.toFixed(2);
-var loinhuangiamuonbanvnd = loinhuangiamuonban * tigia;
+    var loinhuangiamuonbanvnd = loinhuangiamuonban * tigia;
 document.getElementById('loinhuangiamuonbanvnd2').innerHTML = numberWithCommas(loinhuangiamuonbanvnd.toFixed());
-var tongtaisansaumuonban = taisan + loinhuangiamuonban;
+    var tongtaisansaumuonban = taisan + loinhuangiamuonban;
 document.getElementById('tongtaisansaumuonban2').innerHTML = tongtaisansaumuonban.toFixed(2);
-var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
+    var tongtaisansaumuonbanvnd = tongtaisansaumuonban * tigia;
 document.getElementById('tongtaisansaumuonbanvnd2').innerHTML = numberWithCommas(tongtaisansaumuonbanvnd.toFixed());
 
 }
 
         
         
-        function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
   let expires = "expires="+d.toUTCString();
@@ -431,13 +447,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let dutinhcatloc = getCookie("dutinhcatlo");
     let phimuavaoc = getCookie("phimuavao");
     let phigiamuonbanc = getCookie("phigiamuonban");
-  if (giamuac != ""){document.getElementById("giamua").value = getCookie('giamua');} else {document.getElementById("giamua").value = "0";}
-  if (tigiac != ""){document.getElementById("tigia").value = getCookie('tigia');} else {document.getElementById("tigia").value = "22480";}
-  if (taisanc != ""){document.getElementById("taisandangco").value = getCookie('taisan');} else {document.getElementById("taisandangco").value = "0";}
-  if (dutinhbanc != ""){document.getElementById("dutinhban").value = getCookie('dutinhban');} else {document.getElementById("dutinhban").value = "1";}
-  if (dutinhcatloc != ""){document.getElementById("dutinhcatlo").value = getCookie('dutinhcatlo');} else {document.getElementById("dutinhcatlo").value = "0.7";}
-  if (phimuavaoc != ""){document.getElementById("phimuavao").value = getCookie('phimuavao');} else {document.getElementById("phimuavao").value = "0.1";}
-  if (phigiamuonbanc != ""){document.getElementById("phigiamuonban").value = getCookie('phigiamuonban');} else {document.getElementById("phigiamuonban").value = "0.1";}
+
+    let cryptocheck = getCookie("ws");
+    if (cryptocheck != ""){startgame(cryptocheck);} else {startgame("wss://stream.binance.com:9443/ws/btcusdt@trade");
+}
+
+  if (giamuac != ""){document.getElementById("giamua").value = giamuac;} else {document.getElementById("giamua").value = "0";}
+  if (tigiac != ""){document.getElementById("tigia").value = tigiac;} else {document.getElementById("tigia").value = "22480";}
+  if (taisanc != ""){document.getElementById("taisandangco").value = taisanc;} else {document.getElementById("taisandangco").value = "0";}
+  if (dutinhbanc != ""){document.getElementById("dutinhban").value = dutinhbanc;} else {document.getElementById("dutinhban").value = "1";}
+  if (dutinhcatloc != ""){document.getElementById("dutinhcatlo").value = dutinhcatloc;} else {document.getElementById("dutinhcatlo").value = "0.7";}
+  if (phimuavaoc != ""){document.getElementById("phimuavao").value = phimuavaoc;} else {document.getElementById("phimuavao").value = "0.1";}
+  if (phigiamuonbanc != ""){document.getElementById("phigiamuonban").value = phigiamuonbanc;} else {document.getElementById("phigiamuonban").value = "0.1";}
 });
 
     document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
@@ -448,31 +469,67 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("dutinhcatlo").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("dutinhban").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("giamuonban2").addEventListener("input", nhapban); /// if GIA MUON BAN
+
+
+
+    function cryptochange() {
+        var cryptvalue = document.getElementById("cryptolist").value;
+        if (cryptvalue === "btc"){
+            let ws = "wss://stream.binance.com:9443/ws/btcusdt@trade";
+            setCookie('ws', ws , '365');
+            console.log('Websocket change: ' + getCookie('ws'));
+            location.reload();            
+
+        }
+        if (cryptvalue === "eth"){
+            let ws = "wss://stream.binance.com:9443/ws/ethusdt@trade";
+            setCookie('ws', ws , '365');
+            console.log('Websocket change: ' + getCookie('ws'));
+            location.reload();        } 
+        if (cryptvalue === "mana"){
+            let ws = "wss://stream.binance.com:9443/ws/manausdt@trade";
+            setCookie('ws', ws , '365');
+            console.log('Websocket change: ' + getCookie('ws'));
+            location.reload();
+        }
+        if (cryptvalue === "sand"){
+            let ws = "wss://stream.binance.com:9443/ws/sandusdt@trade";
+            setCookie('ws', ws , '365');
+            console.log('Websocket change: ' + getCookie('ws'));
+            location.reload();
+        }
+    }
+
+
         
     </script>
+
+
 <script>
+
+  function startgame(ws) {     
+    let wsad = new WebSocket(ws);
     let etherprice = document.getElementById("ethprice");
     let giamuonban = document.getElementById("giamuonban");
-    let ws = new WebSocket('wss://stream.binance.com:9443/ws/ethusdt@trade')
     let lastPrice = null;
+            wsad.onmessage = (event) => {
+                let stockObject = JSON.parse(event.data);
+                let ethval = stockObject.p;
+                let price = parseFloat(ethval).toFixed(2);
 
-    ws.onmessage = (event) => {
-        let stockObject = JSON.parse(event.data);
-        let ethval = stockObject.p;
-        let price = parseFloat(ethval).toFixed(2);
+                etherprice.innerHTML = price;   
+                if (price > lastPrice){
+                    etherprice.className = "green";
+                }
+                if (price < lastPrice){
+                    etherprice.className = "red";
+                }
+                lastPrice = price;
 
-        etherprice.innerHTML = price;   
-        if (price > lastPrice){
-            etherprice.className = "green";
-        }
-        if (price < lastPrice){
-            etherprice.className = "red";
-        }
-        lastPrice = price;
-
-        giamuonban.value = ethval;
-        livecal();
-    }
+                giamuonban.value = ethval;
+                livecal();
+            }
+  }
 </script>
 </body>
 </html>
