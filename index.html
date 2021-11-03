@@ -493,33 +493,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var cryptvalue = document.getElementById("cryptolist").value;
         if (cryptvalue === "btc"){
             let ws = "wss://stream.binance.com:9443/ws/btcusdt@trade";
-            let wstext = '1';
-            setCookie('wstext', wstext , '365');
+            setCookie('wstext', '1' , '365');
             setCookie('ws', ws , '365');
             console.log('Websocket change: ' + getCookie('ws'));
+            console.log('Websocket change: ' + getCookie('wstext'));
+
             location.reload();            
         }
         if (cryptvalue === "eth"){
             let ws = "wss://stream.binance.com:9443/ws/ethusdt@trade";
             setCookie('ws', ws , '365');
-            let wstext = '2';
-            setCookie('wstext', wstext , '365');
+            setCookie('wstext', '2' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
+            console.log('Websocket change: ' + getCookie('wstext'));
+
             location.reload();        } 
         if (cryptvalue === "mana"){
             let ws = "wss://stream.binance.com:9443/ws/manausdt@trade";
             setCookie('ws', ws , '365');
-            let wstext = '3';
-            setCookie('wstext', wstext , '365');
+            setCookie('wstext', '3' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
+            console.log('Websocket change: ' + getCookie('wstext'));
+
             location.reload();
         }
         if (cryptvalue === "sand"){
             let ws = "wss://stream.binance.com:9443/ws/sandusdt@trade";
             setCookie('ws', ws , '365');
-            let wstext = '4';
-            setCookie('wstext', wstext , '365');
+            setCookie('wstext', '4' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
+            console.log('Websocket change: ' + getCookie('wstext'));
+
             location.reload();
         }
     }
