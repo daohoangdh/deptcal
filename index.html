@@ -487,7 +487,7 @@ function checktemplate(){
   if (phigiamuonbanc != ""){document.getElementById("phigiamuonban").value = phigiamuonbanc;} else {document.getElementById("phigiamuonban").value = "0.1";}
     
         if (cryptotext == '0'){
-            //cryptotextid.selectedIndex = cryptotext;
+            cryptotextid.selectedIndex = cryptotext;
             fire.innerHTML = 'BTC/USDT STOCK';
             if (taisanbtc != ""){document.getElementById("taisandangco").value = taisanbtc;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuabtc != ""){document.getElementById("giamua").value = giamuabtc;} else {document.getElementById("giamua").value = "0";}
@@ -498,7 +498,7 @@ function checktemplate(){
 
         }
         if (cryptotext == '1'){
-           // cryptotextid.selectedIndex = cryptotext;
+            cryptotextid.selectedIndex = cryptotext;
             fire.innerHTML = 'ETH/USDT STOCK';
             if (taisaneth != ""){document.getElementById("taisandangco").value = taisaneth;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuaeth != ""){document.getElementById("giamua").value = giamuaeth;} else {document.getElementById("giamua").value = "0";}
@@ -509,7 +509,7 @@ function checktemplate(){
 
         }
         if (cryptotext == '2'){
-           // cryptotextid.selectedIndex = cryptotext;
+           cryptotextid.selectedIndex = cryptotext;
             fire.innerHTML = 'MANA/USDT STOCK';
             if (taisanmana != ""){document.getElementById("taisandangco").value = taisanmana;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuamana != ""){document.getElementById("giamua").value = giamuamana;} else {document.getElementById("giamua").value = "0";}
@@ -521,7 +521,7 @@ function checktemplate(){
 
         }
         if (cryptotext == '3'){
-           // cryptotextid.selectedIndex = cryptotext;
+            cryptotextid.selectedIndex = cryptotext;
             fire.innerHTML = 'SAND/USDT STOCK';
             if (taisansand != ""){document.getElementById("taisandangco").value = taisansand;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuasand != ""){document.getElementById("giamua").value = giamuasand;} else {document.getElementById("giamua").value = "0";}
@@ -532,7 +532,7 @@ function checktemplate(){
 
 
         }if (cryptotext === 'undefined') {
-       // cryptotextid.selectedIndex = 0;
+        cryptotextid.selectedIndex = 0;
         fire.innerHTML = 'BTC/USDT STOCK';
         console.log('set as default' + cryptotext);
 
