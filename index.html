@@ -137,7 +137,7 @@
 
 <body>
 
-    <div class="header">BINANCE STOCK TRADE</div>
+    <div class="header" id="fire">BINANCE STOCK TRADE</div>
     <div class="headtext">
     Tài sản <input type="number" class="inputvua" id="taisandangco" value="100">
     Giá mua vào <input type="number" class="inputgia" id="giamua">
@@ -150,10 +150,10 @@
             <label for="cars">Crypto:</label>
             
             <select name="crypto" onchange="cryptochange(this)" id="cryptolist">
-              <option value="btc">BTC/USDT</option>
-              <option value="eth">ETH/USDT</option>
-              <option value="mana">MANA/USDT</option>
-              <option value="sand">SAND/USDT</option>
+              <option value="btc" selected="">BTC/USDT</option>
+              <option value="eth" selected="">ETH/USDT</option>
+              <option value="mana" selected="selected">MANA/USDT</option>
+              <option value="sand" selected="">SAND/USDT</option>
             </select>
           </form>
           
@@ -313,23 +313,36 @@
         document.getElementById('thiethai').innerHTML = thiethai.toFixed(2);
         var thiethaivnd = thiethai * tigia;
         document.getElementById('thiethaivnd').innerHTML = numberWithCommas(thiethaivnd.toFixed());
-    
-                                setCookie('taisan', taisan , '365');
+        let listid = document.getElementById('cryptolist');
+        let currenttemplate = listid.options[ listid.selectedIndex ].value;
+
+            if (currenttemplate === 'btc'){
+                setCookie('taisanbtc', taisan , '365');
+                setCookie('giamuabtc', giamua , '365');
+                setCookie('dutinhbanbtc', dtbrval , '365');
+                setCookie('dutinhbanbtc', dtclval , '365');
+            }
+            if (currenttemplate === 'eth'){
+                setCookie('taisaneth', taisan , '365');
+                setCookie('giamuaeth', giamua , '365');
+                setCookie('dutinhbaneth', dtbrval , '365');
+                setCookie('dutinhcatloeth', dtclval , '365');          
+              }
+            if (currenttemplate === 'mana'){
+                setCookie('taisanmana', taisan , '365');
+                setCookie('giamuamana', giamua , '365');
+                setCookie('dutinhbanmana', dtbrval , '365');
+                setCookie('dutinhcatlomana', dtclval , '365');           
+             }
+            if (currenttemplate === 'sand'){
+                setCookie('taisansand', taisan , '365');
+                setCookie('giamuasand', giamua , '365');
+                setCookie('dutinhbansand', dtbrval , '365');
+                setCookie('dutinhcatlosand', dtclval , '365');        
+                };
                                 setCookie('tigia', tigia , '365');
                                 setCookie('phigiamuonban', phigiamuonban , '365');
                                 setCookie('phimuavao', phimuavao , '365');
-                                setCookie('giamua', giamua , '365'); 
-                                setCookie('dutinhban', dtbrval , '365');
-                                setCookie('dutinhcatlo', dtclval , '365');
-                                      
-        console.log('tai san dang co: ' + getCookie('taisan'));
-        console.log('ti gia: ' + getCookie('tigia'));
-        console.log('phi gia muon ban: ' + getCookie('phigiamuonban'));
-        console.log('phi mua vao: ' + getCookie('phimuavao'));
-        console.log('Gia mua vao: ' + getCookie('giamua'));
-        console.log('du tinh ban: ' + getCookie('dutinhban'));
-        console.log('du tinh cat lo: ' + getCookie('dutinhcatlo'));
-    
     
     }
   
@@ -436,47 +449,101 @@ function getCookie(cname) {
     }
   }
   return "";
-}
+};
 
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-  let giamuac = getCookie("giamua");
+function checktemplate(){
+    let cryptotext = getCookie('wstext');
+    let cryptotextid = document.getElementById('cryptolist');
+    
     let tigiac = getCookie("tigia");
-    let taisanc = getCookie("taisan");
     let dutinhbanc = getCookie("dutinhban");
     let dutinhcatloc = getCookie("dutinhcatlo");
     let phimuavaoc = getCookie("phimuavao");
     let phigiamuonbanc = getCookie("phigiamuonban");
 
-    let cryptocheck = getCookie("ws");
-    if (cryptocheck != ""){startgame(cryptocheck);} else {startgame("wss://stream.binance.com:9443/ws/btcusdt@trade")};
-    let cryptotext = getCookie('wstext');
-    let cryptotextid = document.getElementById('cryptolist');
+    let giamuabtc = getCookie("giamuabtc");
+    let giamuaeth = getCookie("giamuaeth");
+    let giamuamana = getCookie("giamuamana");
+    let giamuasand = getCookie("giamuasand");
 
-    if (cryptotext != ""){
-        if (cryptotext === '0'){
-            cryptotextid.selectedIndex = 0;
-        }
-        if (cryptotext === '1'){
-            cryptotextid.selectedIndex = 1;
-        }
-        if (cryptotext === '2'){
-            cryptotextid.selectedIndex = 2;
-        }
-        if (cryptotext === '3'){
-            cryptotextid.selectedIndex = 3;
-        }else {
-        cryptotextid.selectedIndex = 0;
-    }
-};
+    let taisanbtc = getCookie("taisanbtc");
+    let taisaneth = getCookie("taisaneth");
+    let taisanmana = getCookie("taisanmana");
+    let taisansand = getCookie("taisansand");
 
-  if (giamuac != ""){document.getElementById("giamua").value = giamuac;} else {document.getElementById("giamua").value = "0";}
+    let dutinhbanbtc = getCookie("dutinhbanbtc");
+    let dutinhbaneth = getCookie("dutinhbaneth");
+    let dutinhbanmana = getCookie("dutinhbanmana");
+    let dutinhbansand = getCookie("dutinhbansand");
+
+    let dutinhcatlobtc = getCookie("dutinhcatlobtc");
+    let dutinhcatloeth = getCookie("dutinhcatloeth");
+    let dutinhcatlomana = getCookie("dutinhcatlomana");
+    let dutinhcatlosand = getCookie("dutinhcatlosand");
+
+
   if (tigiac != ""){document.getElementById("tigia").value = tigiac;} else {document.getElementById("tigia").value = "22480";}
-  if (taisanc != ""){document.getElementById("taisandangco").value = taisanc;} else {document.getElementById("taisandangco").value = "0";}
-  if (dutinhbanc != ""){document.getElementById("dutinhban").value = dutinhbanc;} else {document.getElementById("dutinhban").value = "1";}
-  if (dutinhcatloc != ""){document.getElementById("dutinhcatlo").value = dutinhcatloc;} else {document.getElementById("dutinhcatlo").value = "0.7";}
   if (phimuavaoc != ""){document.getElementById("phimuavao").value = phimuavaoc;} else {document.getElementById("phimuavao").value = "0.1";}
   if (phigiamuonbanc != ""){document.getElementById("phigiamuonban").value = phigiamuonbanc;} else {document.getElementById("phigiamuonban").value = "0.1";}
+    
+        if (cryptotext == '0'){
+            //cryptotextid.selectedIndex = cryptotext;
+            fire.innerHTML = 'BTC/USDT STOCK';
+            if (taisanbtc != ""){document.getElementById("taisandangco").value = taisanbtc;} else {document.getElementById("taisandangco").value = "0";}
+            if (giamuabtc != ""){document.getElementById("giamua").value = giamuabtc;} else {document.getElementById("giamua").value = "0";}
+            if (dutinhbanbtc != ""){document.getElementById("dutinhban").value = dutinhbanbtc;} else {document.getElementById("dutinhban").value = "1";}
+            if (dutinhcatlobtc != ""){document.getElementById("dutinhcatlo").value = dutinhcatlobtc;} else {document.getElementById("dutinhcatlo").value = "0.7";}
+
+            console.log('BTC TEMPLATE - TOTAL: ' + taisanbtc + ' BOUGHT PRICE: ' + giamuabtc);
+
+        }
+        if (cryptotext == '1'){
+           // cryptotextid.selectedIndex = cryptotext;
+            fire.innerHTML = 'ETH/USDT STOCK';
+            if (taisaneth != ""){document.getElementById("taisandangco").value = taisaneth;} else {document.getElementById("taisandangco").value = "0";}
+            if (giamuaeth != ""){document.getElementById("giamua").value = giamuaeth;} else {document.getElementById("giamua").value = "0";}
+            if (dutinhbaneth != ""){document.getElementById("dutinhban").value = dutinhbaneth;} else {document.getElementById("dutinhban").value = "1";}
+            if (dutinhcatloeth != ""){document.getElementById("dutinhcatlo").value = dutinhcatloeth;} else {document.getElementById("dutinhcatlo").value = "0.7";}
+
+            console.log('ETH TEMPLATE - TOTAL: ' + taisaneth + ' BOUGHT PRICE: ' + giamuaeth);
+
+        }
+        if (cryptotext == '2'){
+           // cryptotextid.selectedIndex = cryptotext;
+            fire.innerHTML = 'MANA/USDT STOCK';
+            if (taisanmana != ""){document.getElementById("taisandangco").value = taisanmana;} else {document.getElementById("taisandangco").value = "0";}
+            if (giamuamana != ""){document.getElementById("giamua").value = giamuamana;} else {document.getElementById("giamua").value = "0";}
+            if (dutinhbanmana != ""){document.getElementById("dutinhban").value = dutinhbanmana;} else {document.getElementById("dutinhban").value = "1";}
+            if (dutinhcatlomana != ""){document.getElementById("dutinhcatlo").value = dutinhcatlomana;} else {document.getElementById("dutinhcatlo").value = "0.7";}
+
+            console.log('MANA TEMPLATE - TOTAL: ' + taisanmana + ' BOUGHT PRICE: ' + giamuamana);
+
+
+        }
+        if (cryptotext == '3'){
+           // cryptotextid.selectedIndex = cryptotext;
+            fire.innerHTML = 'SAND/USDT STOCK';
+            if (taisansand != ""){document.getElementById("taisandangco").value = taisansand;} else {document.getElementById("taisandangco").value = "0";}
+            if (giamuasand != ""){document.getElementById("giamua").value = giamuasand;} else {document.getElementById("giamua").value = "0";}
+            if (dutinhbansand != ""){document.getElementById("dutinhban").value = dutinhbansand;} else {document.getElementById("dutinhban").value = "1";}
+            if (dutinhcatlosand != ""){document.getElementById("dutinhcatlo").value = dutinhcatlosand;} else {document.getElementById("dutinhcatlo").value = "0.7";}
+
+            console.log('SAND TEMPLATE - TOTAL: ' + taisansand + ' BOUGHT PRICE: ' + giamuasand);
+
+
+        }if (cryptotext === 'undefined') {
+       // cryptotextid.selectedIndex = 0;
+        fire.innerHTML = 'BTC/USDT STOCK';
+        console.log('set as default' + cryptotext);
+
+
+            }
+}
+document.addEventListener("DOMContentLoaded", function(event) { 
+    let fire = document.getElementById("fire");
+    let cryptocheck = getCookie("ws");
+    if (cryptocheck != ""){startgame(cryptocheck);} else {startgame("wss://stream.binance.com:9443/ws/btcusdt@trade")};
+    checktemplate();
 });
 
     document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
@@ -537,7 +604,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <script>
 
   function startgame(ws) {     
-    let wsad = new WebSocket(ws);
+      if(ws === 'stop'){
+          return false;
+      }else{
+        let wsad = new WebSocket(ws);
     let etherprice = document.getElementById("ethprice");
     let giamuonban = document.getElementById("giamuonban");
     let lastPrice = null;
@@ -558,7 +628,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 giamuonban.value = ethval;
                 livecal();
             }
-  }
+        }
+      }
+  
 </script>
 </body>
 </html>
