@@ -611,7 +611,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let etherprice = document.getElementById("ethprice");
     let giamuonban = document.getElementById("giamuonban");
     let lastPrice = null;
-            wsad.onmessage = (event) => {
+    if (ws === 'wss://stream.binance.com:9443/ws/btcusdt@trade'){
+        wsad.onmessage = (event) => {
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(2);
@@ -628,8 +629,67 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 giamuonban.value = ethval;
                 livecal();
             }
-        }
-      }
+    }
+    if (ws === 'wss://stream.binance.com:9443/ws/ethusdt@trade'){
+        wsad.onmessage = (event) => {
+                let stockObject = JSON.parse(event.data);
+                let ethval = stockObject.p;
+                let price = parseFloat(ethval).toFixed(2);
+
+                etherprice.innerHTML = price;   
+                if (price > lastPrice){
+                    etherprice.className = "green";
+                }
+                if (price < lastPrice){
+                    etherprice.className = "red";
+                }
+                lastPrice = price;
+
+                giamuonban.value = ethval;
+                livecal();
+            }
+    }
+    if (ws === 'wss://stream.binance.com:9443/ws/manausdt@trade'){
+        wsad.onmessage = (event) => {
+                let stockObject = JSON.parse(event.data);
+                let ethval = stockObject.p;
+                let price = parseFloat(ethval).toFixed(4);
+
+                etherprice.innerHTML = price;   
+                if (price > lastPrice){
+                    etherprice.className = "green";
+                }
+                if (price < lastPrice){
+                    etherprice.className = "red";
+                }
+                lastPrice = price;
+
+                giamuonban.value = ethval;
+                livecal();
+            }
+    }
+    if (ws === 'wss://stream.binance.com:9443/ws/sandusdt@trade'){
+        wsad.onmessage = (event) => {
+                let stockObject = JSON.parse(event.data);
+                let ethval = stockObject.p;
+                let price = parseFloat(ethval).toFixed(4);
+
+                etherprice.innerHTML = price;   
+                if (price > lastPrice){
+                    etherprice.className = "green";
+                }
+                if (price < lastPrice){
+                    etherprice.className = "red";
+                }
+                lastPrice = price;
+
+                giamuonban.value = ethval;
+                livecal();
+            }
+          }
+           
+     }
+ }
   
 </script>
 </body>
