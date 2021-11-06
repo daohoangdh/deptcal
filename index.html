@@ -19,6 +19,7 @@
         }
         .headtext{
     border:1px solid white;
+    display:flex;
         }
         .trigia{
             text-align: center;
@@ -44,15 +45,18 @@
     font-weight: bold;
         }
         input.inputgia{
-            width: 60px;
+            width: 80px;
             border: 0px solid greenyellow;
-            background: greenyellow;
+            background: rgb(203, 207, 255);
         }
         input.inputbe{
-            width: 10%;
+            width: 15%;
+        }
+        input.inputbe2{
+            width: 20%;
         }
         input.inputvua{
-            width: 60px;
+            width: 80px;
         }
         #showgiamua{
             padding:15px;
@@ -117,12 +121,17 @@
             display: none;
         }
         #giamuonban2{
-            width: 60px;
+            width: 80px;
             padding: 5px;
             margin-top: 15px;
         }
         .sauheadtext{
             padding:10px 0;
+        }
+        .sau2{
+            flex: 1;
+align-self: center;
+text-align: right;
         }
         #livecal tr td, #livecal2 tr td{
             width: 30%;
@@ -132,6 +141,13 @@
             flex: 1;
             width: 50%;
         }
+        .tdhead{
+            text-align: center;
+padding: 10px;
+font-size: 20px;
+font-weight: bold;
+border-top: 1px solid white;
+        }
     </style>
 </head>
 
@@ -139,8 +155,14 @@
 
     <div class="header" id="fire">BINANCE STOCK TRADE</div>
     <div class="headtext">
-    Tài sản <input type="number" class="inputvua" id="taisandangco" value="100">
-    Giá mua vào <input type="number" class="inputgia" id="giamua">
+        <div class="sau1">
+            Assets <input type="number" class="inputvua" id="taisandangco" value="100">
+
+        </div>
+        <div class="sau2">
+            Bought Price <input type="number" class="inputgia" id="giamua">
+
+        </div>
 
     </div>
 
@@ -187,23 +209,30 @@
          <input id="giamuonban" type="number" value="1" class="giamuonban">
 
     <table>
-        <tr>
+        <tr style="text-align: center;">
             <td>
-    <span class="textbold">Tỉ giá: </span><input type="number" class="inputvua" id="tigia" value="22680"> Sell Fee <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
-    Buy Fee <input id="phimuavao" class="inputbe" type="number" value="0.1"></td>
+    <span class="textbold"></span><input type="number" class="inputvua" id="tigia" value="22680"><small> Sell Fee </small> <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
+    <small> Buy Fee </small> <input id="phimuavao" class="inputbe" type="number" value="0.1"></td>
         </td>
-    </tr><tr>
-            <td><span class="textbold">TAKE PROFIT  </span><input id="dutinhban" type="number" value="1" class="inputbe"> Stop Loss <input id="dutinhcatlo" type="number" value="0.8" class="inputbe">
+    </tr>
+    <tr>
+        <td class="tdhead">
+            ORDER CALCULATOR
+        </td>
+    </tr>
+    
+    <tr>
+            <td><span class="textbold">TAKE PROFIT  </span><input id="dutinhban" type="number" value="1" class="inputbe2"> Stop Loss <input id="dutinhcatlo" type="number" value="0.8" class="inputbe2">
         </td>
             </tr>
         <tr>
             <td>
                 <table class="giaban">
                     <tr>
-                        <td class="head">GIÁ BÁN</td>
-                        <td class="head middle">TÀI SẢN</td>
-                        <td class="head middle">LÃI $</td>
-                        <td class="head end">LÃI VNĐ</td>
+                        <td class="head">PRICE</td>
+                        <td class="head middle">ASSET</td>
+                        <td class="head middle">PROFIT $</td>
+                        <td class="head end">PROFIT VNĐ</td>
                     </tr>
                     <tr>
                         <td><div id="giadutinhban" class="showgia"></div></td>
@@ -224,10 +253,10 @@
                 <td>
                     <table class="giaban catlo">
                         <tr>
-                            <td class="head">GIÁ BÁN</td>
-                            <td class="head middle">TÀI SẢN</td>
-                            <td class="head middle">LỖ</td>
-                            <td class="head end">LỖ VNĐ</td>
+                            <td class="head">PRICE</td>
+                            <td class="head middle">ASSET</td>
+                            <td class="head middle">LOSS $</td>
+                            <td class="head end">LOSS VNĐ</td>
                         </tr>
                        <tr>
                         <td><div id="giacatlo" class="showgia"></div></td>
@@ -248,7 +277,7 @@
 
 
 
-    <input id="giamuonban2" type="number" value="1" class="giamuonban">
+    <input id="giamuonban2" type="number" value="1" class="giamuonban"> <b>SELL CALCULATOR</b>
 
 
     <table id="livecal2">
@@ -294,23 +323,23 @@
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
 
         var dtbr = giamua + (giamua * dtbrval/100);
-        document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(2);
+        document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(3);
     
         var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phigiamuonban/100) - (taisan *phimuavao/100);
-        document.getElementById('trigiasauban').innerHTML = trigiasauban.toFixed(2);
+        document.getElementById('trigiasauban').innerHTML = trigiasauban.toFixed(3);
         var loinhuansauban = trigiasauban - taisan;
-        document.getElementById('loinhuansauban').innerHTML = loinhuansauban.toFixed(2);
+        document.getElementById('loinhuansauban').innerHTML = loinhuansauban.toFixed(3);
         var loinhuanvnd = loinhuansauban * tigia;
         document.getElementById('loinhuanvnd').innerHTML = numberWithCommas(loinhuanvnd.toFixed());
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
         var dtcl = giamua + (giamua * -dtclval/100);
-        document.getElementById('giacatlo').innerHTML = dtcl.toFixed(2);
+        document.getElementById('giacatlo').innerHTML = dtcl.toFixed(3);
     
         var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phigiamuonban/100) - (taisan *phimuavao/100);
-        document.getElementById('trigiasaucatlo').innerHTML = trigiasaucatlo.toFixed(2);
+        document.getElementById('trigiasaucatlo').innerHTML = trigiasaucatlo.toFixed(3);
         var thiethai = taisan - trigiasaucatlo;
-        document.getElementById('thiethai').innerHTML = thiethai.toFixed(2);
+        document.getElementById('thiethai').innerHTML = thiethai.toFixed(3);
         var thiethaivnd = thiethai * tigia;
         document.getElementById('thiethaivnd').innerHTML = numberWithCommas(thiethaivnd.toFixed());
         let listid = document.getElementById('cryptolist');
