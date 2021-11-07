@@ -148,6 +148,31 @@ font-size: 20px;
 font-weight: bold;
 border-top: 1px solid white;
         }
+        .buysellvl{
+            display: flex;
+            padding: 15px 0;
+        }
+        #sellvl, #buyvl{
+            padding:10px;
+            font-weight: bold;
+            color: white;
+        }
+        #buyvl{
+            background: green;
+        }
+        #sellvl{
+            text-align: right;
+            background: red;
+        }
+        .smvl{
+            float: right;
+        }
+        .smvlr{
+            float: left;
+        }
+        .spsm{
+            font-size: 9px;
+        }
     </style>
 </head>
 
@@ -208,7 +233,14 @@ border-top: 1px solid white;
     
          <input id="giamuonban" type="number" value="1" class="giamuonban">
 
+         
+                <div class="buysellvl">
+                    <div id="buyvl"><span id="buynote" value="0"></span></div>
+                    <div id="sellvl"><span id="sellnote" value="0"></span></div>
+                </div>
+         
     <table>
+      
         <tr style="text-align: center;">
             <td>
     <span class="textbold"></span><input type="number" class="inputvua" id="tigia" value="22680"><small> Sell Fee </small> <input id="phigiamuonban" type="number" value="0.1" class="inputbe">
@@ -575,7 +607,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     checktemplate();
 });
 
+
+    let buyvolume = document.getElementById("buyvolume"); /// if input sotien
     document.getElementById("giamua").addEventListener("input", dutinhban); /// if input sotien
+    document.getElementById("giamua").addEventListener("input", resetnote); /// if input sotien
+
     document.getElementById("taisandangco").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("tigia").addEventListener("input", dutinhban); /// if input sotien
     document.getElementById("phigiamuonban").addEventListener("input", dutinhban); /// if input sotien
@@ -624,9 +660,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
             location.reload();
         }
     }
-
-
-        
+function resetnote(){
+    buy = 0;
+    sell = 0;
+}
+         var buy = 0;
+        var sell = 0;
+    function note(tinhtrang){
+        if (tinhtrang === '1'){ //1 = tiep tuc
+            buy++;
+            totalvl = buy/(buy + sell)*100;
+            sellvl = 100 - totalvl;
+            document.getElementById("buynote").innerHTML = buy + '<span class="smvl">' + sellvl.toFixed(0) +' <span class="spsm">%</span></span>';
+            document.getElementById("buyvl").style.width = totalvl +'%';    
+            document.getElementById("sellvl").style.width = sellvl +'%';   
+        }       
+        if (tinhtrang === '0'){ //1 = tiep tuc
+            sell++;
+            totalvls = sell/(buy + sell)*100;
+            buyvl = 100 - totalvls;
+            document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(0) + ' <span class="spsm">%</span></span>' + sell;
+            document.getElementById("buyvl").style.width = totalvls +'%';    
+            document.getElementById("sellvl").style.width = buyvl +'%';  
+        }
+    
+} 
     </script>
 
 
@@ -649,12 +707,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
+                    note('0');
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
+                    note('1');
                 }
                 lastPrice = price;
-
                 giamuonban.value = ethval;
                 livecal();
             }
