@@ -39,7 +39,11 @@
         .trigia .showtigia{
             align-self: center;
         }
-        
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
         input{
     font-size: 16px;
     font-weight: bold;
@@ -148,22 +152,28 @@ font-size: 20px;
 font-weight: bold;
 border-top: 1px solid white;
         }
-        .buysellvl{
+        .buysellvl,.buysellqty{
             border:1px solid white;
             display: flex;
-            margin: 15px 0;
+            margin: 40px 0 0 0;
             min-width: 100%;
             height:40px;
         }
-        #sellvl, #buyvl{
+        #sellvl, #buyvl,#buyqty,#sellqty{
             padding:10px;
             font-weight: bold;
             color: white;
         }
-        #buyvl{
+        #topline{
+            position: absolute;
+            top:-30px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        #buyvl,#buyqty{
             background: green;
         }
-        #sellvl{
+        #sellvl,#sellqty{
             text-align: right;
             background: red;
         }
@@ -175,6 +185,20 @@ border-top: 1px solid white;
         }
         .spsm{
             font-size: 9px;
+        }
+        #bytsellline{
+            position: relative;
+        }
+        .middleline{
+            border-left: 1px solid white;
+        }
+        #toplinevl,#toplineqty{
+            position: absolute;
+            top: -30px;
+            font-weight: bold;
+            font-size: 20px;
+            width: 70px;
+            left: calc(50% - 15px);
         }
     </style>
 </head>
@@ -239,9 +263,44 @@ border-top: 1px solid white;
          
                 <div class="buysellvl">
                     <div id="buyvl"><span id="buynote" value="0"></span></div>
+                    <div id="bytsellline"><div id="toplinevl">0%</div></div>
+                    <div class="middleline"></div>
                     <div id="sellvl"><span id="sellnote" value="0"></span></div>
                 </div>
-         
+                
+                <div class="buysellqty">
+                    <div id="buyqty"><span id="bqty" value="0"></span></div>
+                    <div id="bytsellline"><div id="toplineqty">0%</div></div>
+                    <div class="middleline"></div>
+                    <div id="sellqty"><span id="sqty" value="0"></span></div>
+                </div>
+         <table id="averan">
+             <tr>
+                 <td style="border-bottom: 1px solid green;text-align: center;"><b><div id="trungbinhmuavao"></div></b></td>
+                 <td style="border-bottom: 1px solid red;text-align: center;"><b><div id="trungbinhbanra"></div></b></td>
+                </tr>
+                <tr>
+                 <td>
+                    <ul>
+                        <li><span id="doimuatakeprofit"></span> - Buyer TP</li>
+                        <li><span id="doimuastoploss"></span> - Buyer SL</li>
+                    </ul>
+                 </td>
+                 <td>
+                    
+                    <ul>
+                        <li><span id="doibanmuonmua"></span>  - Seller BUY</li>
+                        <li><span id="doibantakeprofit"></span>  - Seller TP</li>
+                        <li><span id="doibanstoploss"></span>  - Seller SL</li>
+                    </ul>
+                </td>
+             </tr>
+         </table>
+                <div class="fastperdict">
+                    <div id="doibanchotlai"></div>
+                    <div id="doibanstoploss"></div>
+                </div>
+
     <table>
       
         <tr style="text-align: center;">
@@ -666,26 +725,80 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function resetnote(){
     buy = 0;
     sell = 0;
+    bqty = 0;
+    sqty = 0;
+    prbvl = 0;
+    prsvl = 0;
 }
-         var buy = 0;
-        var sell = 0;
-    function note(tinhtrang){
-        if (tinhtrang === '0'){ //1 = tiep tuc
+    var bqty = 0;
+    var sqty = 0;
+    var buy = 0;
+    var sell = 0;
+    var prbvl = 0;
+    var prsvl = 0;
+    var muonbanphantram = document.getElementById("dutinhban").valueAsNumber;
+    var muonstoploss = document.getElementById("dutinhcatlo").valueAsNumber;
+    var phigiamua = document.getElementById("phigiamuonban").valueAsNumber;
+    var phigiaban = document.getElementById("phimuavao").valueAsNumber;
+    function note(tinhtrang,qty,price){
+        if (tinhtrang === '0'){ //0 = MUA VAO
             buy++;
             totalvl = buy/(buy + sell)*100;
             sellvl = 100 - totalvl;
             document.getElementById("buynote").innerHTML = buy + '<span class="smvl">' + totalvl.toFixed(2) +' <span class="spsm">%</span></span>';
             document.getElementById("buyvl").style.width = totalvl +'%';    
             document.getElementById("sellvl").style.width = sellvl +'%';   
+
+            bqty += Number(qty);
+            percentbqty = bqty/(bqty+sqty)*100;
+            percentsqty = 100 - percentbqty;
+
+            document.getElementById("toplinevl").innerHTML = (percentbqty - percentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
+
+            document.getElementById("bqty").innerHTML = bqty.toFixed(2) + '<span class="smvl">' + percentbqty.toFixed(2) +' <span class="spsm">%</span></span>';
+            document.getElementById("buyqty").style.width = percentbqty +'%';    
+            document.getElementById("sellqty").style.width = percentsqty +'%';  
+            
+            prbvl += Number(price);
+            trungbinhgia = prbvl/buy;
+            giahomuonban = trungbinhgia + (trungbinhgia*(muonbanphantram + phigiaban + phigiamua )/100);
+            giahomuonstoploss = trungbinhgia - (trungbinhgia*(muonstoploss + phigiaban + phigiamua)/100);
+            document.getElementById("trungbinhmuavao").innerHTML = trungbinhgia.toFixed(4);
+
+            document.getElementById("doimuatakeprofit").innerHTML = giahomuonban.toFixed(3);
+            document.getElementById("doimuastoploss").innerHTML = giahomuonstoploss.toFixed(3);
+
         }       
-        if (tinhtrang === '1'){ //1 = tiep tuc
+        if (tinhtrang === '1'){ //1 = BAN RA
             sell++;
             totalvls = buy/(buy + sell)*100;
             buyvl = 100 - totalvls;
             document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(2) + ' <span class="spsm">%</span></span>' + sell;
             document.getElementById("buyvl").style.width = totalvls +'%';    
             document.getElementById("sellvl").style.width = buyvl +'%';  
-        }
+
+            sqty += Number(qty);
+            spercentbqty = bqty/(bqty + sqty)*100;
+            spercentsqty = 100 - spercentbqty;
+            document.getElementById("toplineqty").innerHTML = (spercentbqty - spercentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
+
+            document.getElementById("sqty").innerHTML = '<span class="smvlr">' + spercentsqty.toFixed(2) + ' <span class="spsm">%</span></span>' + sqty.toFixed(2);
+
+            document.getElementById("buyqty").style.width = spercentbqty +'%';    
+            document.getElementById("sellqty").style.width = spercentsqty +'%';  
+              
+            prsvl += Number(price);
+            trungbinhgiasell = prsvl/sell;
+            giahodutinhmua = trungbinhgiasell - (trungbinhgiasell*(muonbanphantram + phigiaban + phigiamua)/100);
+            doibantakeprofit = giahodutinhmua + (trungbinhgiasell*(muonbanphantram + phigiaban + phigiamua)/100);
+            doibanstoploss = giahodutinhmua - (trungbinhgiasell*(muonstoploss+ phigiaban + phigiamua)/100);
+            document.getElementById("trungbinhbanra").innerHTML = trungbinhgiasell.toFixed(4);
+
+            document.getElementById("doibanmuonmua").innerHTML = giahodutinhmua.toFixed(3);
+            document.getElementById("doibantakeprofit").innerHTML = doibantakeprofit.toFixed(3);   
+            document.getElementById("doibanstoploss").innerHTML = doibanstoploss.toFixed(3);     
+ }
+        
     
 } 
     </script>
@@ -707,17 +820,15 @@ function resetnote(){
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(2);
 
-                let position = stockObject.S;
-
-                console.log(position);
+                let quantity = stockObject.q;
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
-                    note('0');
+                    note('0',quantity, price);
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
-                    note('1');
+                    note('1', quantity, price);
                 }
                 lastPrice = price;
                 giamuonban.value = ethval;
@@ -729,16 +840,17 @@ function resetnote(){
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(2);
+                let quantity = stockObject.q;
 
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
-                    note('0');
+                    note('0', quantity, price);
 
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
-                    note('1');
+                    note('1', quantity, price);
                 }
                 lastPrice = price;
 
@@ -751,16 +863,17 @@ function resetnote(){
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(4);
+                let quantity = stockObject.q;
 
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
-                    note('0');
+                    note('0', quantity, price);
 
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
-                    note('1');
+                    note('1', quantity, price);
                 }
                 lastPrice = price;
 
@@ -773,16 +886,17 @@ function resetnote(){
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(4);
+                let quantity = stockObject.q;
 
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
-                    note('0');
+                    note('0', quantity, price);
 
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
-                    note('1');
+                    note('1', quantity, price);
                 }
                 lastPrice = price;
 
