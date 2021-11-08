@@ -149,8 +149,11 @@ font-weight: bold;
 border-top: 1px solid white;
         }
         .buysellvl{
+            border:1px solid white;
             display: flex;
-            padding: 15px 0;
+            margin: 15px 0;
+            min-width: 100%;
+            height:40px;
         }
         #sellvl, #buyvl{
             padding:10px;
@@ -671,15 +674,15 @@ function resetnote(){
             buy++;
             totalvl = buy/(buy + sell)*100;
             sellvl = 100 - totalvl;
-            document.getElementById("buynote").innerHTML = buy + '<span class="smvl">' + sellvl.toFixed(0) +' <span class="spsm">%</span></span>';
+            document.getElementById("buynote").innerHTML = buy + '<span class="smvl">' + totalvl.toFixed(2) +' <span class="spsm">%</span></span>';
             document.getElementById("buyvl").style.width = totalvl +'%';    
             document.getElementById("sellvl").style.width = sellvl +'%';   
         }       
         if (tinhtrang === '0'){ //1 = tiep tuc
             sell++;
-            totalvls = sell/(buy + sell)*100;
+            totalvls = buy/(buy + sell)*100;
             buyvl = 100 - totalvls;
-            document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(0) + ' <span class="spsm">%</span></span>' + sell;
+            document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(2) + ' <span class="spsm">%</span></span>' + sell;
             document.getElementById("buyvl").style.width = totalvls +'%';    
             document.getElementById("sellvl").style.width = buyvl +'%';  
         }
@@ -704,6 +707,9 @@ function resetnote(){
                 let ethval = stockObject.p;
                 let price = parseFloat(ethval).toFixed(2);
 
+                let position = stockObject.S;
+
+                console.log(position);
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
@@ -727,9 +733,12 @@ function resetnote(){
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
+                    note('0');
+
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
+                    note('1');
                 }
                 lastPrice = price;
 
@@ -746,9 +755,12 @@ function resetnote(){
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
+                    note('0');
+
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
+                    note('1');
                 }
                 lastPrice = price;
 
@@ -765,9 +777,12 @@ function resetnote(){
                 etherprice.innerHTML = price;   
                 if (price > lastPrice){
                     etherprice.className = "green";
+                    note('0');
+
                 }
                 if (price < lastPrice){
                     etherprice.className = "red";
+                    note('1');
                 }
                 lastPrice = price;
 
