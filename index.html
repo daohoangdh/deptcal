@@ -200,6 +200,24 @@ border-top: 1px solid white;
             width: 70px;
             left: calc(50% - 15px);
         }
+        .holdtanggiam{
+            display: flex;
+        width: 100%;
+        margin-bottom: 20px;
+        border-bottom: 1px solid white;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+}
+        
+        #tanglen,#giamdi{
+            width: 50%;
+            font-weight: bold;
+        }
+        #tanglen{
+        }
+        #giamdi{
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -274,6 +292,10 @@ border-top: 1px solid white;
                     <div class="middleline"></div>
                     <div id="sellqty"><span id="sqty" value="0"></span></div>
                 </div>
+                <div class="holdtanggiam">
+                    <div id="tanglen"></div>
+                    <div id="giamdi"></div>
+                </div>
          <table id="averan">
              <tr>
                  <td style="border-bottom: 1px solid green;text-align: center;"><b><div id="trungbinhmuavao"></div></b></td>
@@ -282,8 +304,9 @@ border-top: 1px solid white;
                 <tr>
                  <td>
                     <ul>
-                           <li><span id="doimuastoploss"></span> - Buyer SL</li>
+                        <li><span class="dukien" id="dukien"></span>Predict</li>
                         <li><span id="doimuatakeprofit"></span> - Buyer TP</li>
+                        <li><span id="doimuastoploss"></span> - Buyer SL</li>
                     </ul>
                  </td>
                  <td>
@@ -736,6 +759,7 @@ function resetnote(){
     var sell = 0;
     var prbvl = 0;
     var prsvl = 0;
+    var bvlcuoi = 0;
     var muonbanphantram = document.getElementById("dutinhban").valueAsNumber;
     var muonstoploss = document.getElementById("dutinhcatlo").valueAsNumber;
     var phigiamua = document.getElementById("phigiamuonban").valueAsNumber;
@@ -748,10 +772,13 @@ function resetnote(){
             document.getElementById("buynote").innerHTML = buy + '<span class="smvl">' + totalvl.toFixed(2) +' <span class="spsm">%</span></span>';
             document.getElementById("buyvl").style.width = totalvl +'%';    
             document.getElementById("sellvl").style.width = sellvl +'%';   
-
+            bvlcuoi = bqty/(bqty+sqty)*100;
             bqty += Number(qty);
             percentbqty = bqty/(bqty+sqty)*100;
             percentsqty = 100 - percentbqty;
+            tangthem = percentbqty - bvlcuoi;
+            document.getElementById("tanglen").innerHTML = '+' + tangthem.toFixed(3);
+    
 
             document.getElementById("toplinevl").innerHTML = (percentbqty - percentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
 
@@ -776,12 +803,19 @@ function resetnote(){
             document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(2) + ' <span class="spsm">%</span></span>' + sell;
             document.getElementById("buyvl").style.width = totalvls +'%';    
             document.getElementById("sellvl").style.width = buyvl +'%';  
+          
+            sellvlcuoi = bqty/(bqty + sqty)*100;
 
             sqty += Number(qty);
             spercentbqty = bqty/(bqty + sqty)*100;
             spercentsqty = 100 - spercentbqty;
-            document.getElementById("toplineqty").innerHTML = (spercentbqty - spercentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
 
+
+            giamdi = spercentbqty - sellvlcuoi;
+            document.getElementById("giamdi").innerHTML = giamdi.toFixed(3);
+    
+            document.getElementById("toplineqty").innerHTML = (spercentbqty - spercentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
+       
             document.getElementById("sqty").innerHTML = '<span class="smvlr">' + spercentsqty.toFixed(2) + ' <span class="spsm">%</span></span>' + sqty.toFixed(2);
 
             document.getElementById("buyqty").style.width = spercentbqty +'%';    
@@ -792,6 +826,7 @@ function resetnote(){
             giahodutinhmua = trungbinhgiasell - (trungbinhgiasell*(muonbanphantram + phigiaban + phigiamua)/100);
             doibantakeprofit = giahodutinhmua + (trungbinhgiasell*(muonbanphantram + phigiaban + phigiamua)/100);
             doibanstoploss = giahodutinhmua - (trungbinhgiasell*(muonstoploss+ phigiaban + phigiamua)/100);
+           
             document.getElementById("trungbinhbanra").innerHTML = trungbinhgiasell.toFixed(4);
 
             document.getElementById("doibanmuonmua").innerHTML = giahodutinhmua.toFixed(3);
