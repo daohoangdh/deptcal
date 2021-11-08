@@ -670,7 +670,7 @@ function resetnote(){
          var buy = 0;
         var sell = 0;
     function note(tinhtrang){
-        if (tinhtrang === '1'){ //1 = tiep tuc
+        if (tinhtrang === '0'){ //1 = tiep tuc
             buy++;
             totalvl = buy/(buy + sell)*100;
             sellvl = 100 - totalvl;
@@ -678,7 +678,7 @@ function resetnote(){
             document.getElementById("buyvl").style.width = totalvl +'%';    
             document.getElementById("sellvl").style.width = sellvl +'%';   
         }       
-        if (tinhtrang === '0'){ //1 = tiep tuc
+        if (tinhtrang === '1'){ //1 = tiep tuc
             sell++;
             totalvls = buy/(buy + sell)*100;
             buyvl = 100 - totalvls;
