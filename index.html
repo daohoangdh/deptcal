@@ -842,7 +842,7 @@ function resetnote(){
           
 
 
-            document.getElementById("toplinevl").innerHTML = (percentbqty - percentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
+            document.getElementById("toplinevl").innerHTML = (totalvl - sellvl).toFixed(2) +' <span class="spsm">%</span></span>';
 
             document.getElementById("bqty").innerHTML = bqty.toFixed(2) + '<span class="smvl">' + percentbqty.toFixed(2) +' <span class="spsm">%</span></span>';
             document.getElementById("buyqty").style.width = percentbqty +'%';    
@@ -869,7 +869,8 @@ function resetnote(){
             document.getElementById("sellnote").innerHTML = '<span class="smvlr">' + buyvl.toFixed(2) + ' <span class="spsm">%</span></span>' + sell;
             document.getElementById("buyvl").style.width = totalvls +'%';    
             document.getElementById("sellvl").style.width = buyvl +'%';  
-          
+            document.getElementById("toplinevl").innerHTML = (totalvls - buyvl).toFixed(2) +' <span class="spsm">%</span></span>';
+
             sellvlcuoi = bqty/(bqty + sqty)*100;
 
             sqty += Number(qty);
