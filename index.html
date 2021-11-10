@@ -114,6 +114,10 @@
             min-height: 50px;
             justify-content: center;
         }
+        .dukien{
+            font-size: 20px;
+            color: #fb7bff;
+        }
         #ethprice{
             font-weight: bold;
             font-size: 25px;
@@ -147,22 +151,30 @@ text-align: right;
         }
         .tdhead{
             text-align: center;
-padding: 10px;
-font-size: 20px;
-font-weight: bold;
-border-top: 1px solid white;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            border-top: 1px solid white;
         }
-        .buysellvl,.buysellqty{
+        .buysellvl{
             border:1px solid white;
             display: flex;
             margin: 40px 0 0 0;
             min-width: 100%;
-            height:40px;
+        }
+        .buysellqty{
+            border:1px solid white;
+            display: flex;
+            margin: 40px 0 40px 0;
+            min-width: 100%;
+            height:46px;
         }
         #sellvl, #buyvl,#buyqty,#sellqty{
             padding:10px;
             font-weight: bold;
             color: white;
+         padding: 0;
+
         }
         #topline{
             position: absolute;
@@ -171,17 +183,17 @@ border-top: 1px solid white;
             font-size: 20px;
         }
         #buyvl,#buyqty{
-            background: green;
         }
         #sellvl,#sellqty{
             text-align: right;
-            background: red;
         }
         .smvl{
             float: right;
+            padding-right: 10px;;
         }
         .smvlr{
             float: left;
+            padding-left: 10px;
         }
         .spsm{
             font-size: 9px;
@@ -210,14 +222,55 @@ border-top: 1px solid white;
 }
         
         #tanglen,#giamdi{
-            width: 50%;
+            width: 100%;
             font-weight: bold;
-        }
-        #tanglen{
+            font-size: 150%;
+            padding: 0 10px 0 10px;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
         }
         #giamdi{
+            text-align: left;
+        }
+        #tanglen{
             text-align: right;
         }
+        .tanglentiep{
+            background: blue !important;
+        }
+        .giamditiep{
+            background-color: blue !important;       
+ }
+        .tanglen{
+            text-align: right;
+            background: green;
+        }
+        .giamdi{
+            background: red;
+        }
+      .greenside{
+        width: 100%;
+background: green;
+display: block;
+padding-left: 10px;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+      }
+      .redside{
+        width: 100%;
+background: red;
+display: block;
+padding-right: 10px;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+      }
+      #loinhuangiamuonbanvnd,#loinhuangiamuonbanphantram{
+        font-size: 25px;;
+      }
+      #averan{
+          font-weight: bold;
+          font-size: 16px;
+      }
     </style>
 </head>
 
@@ -280,22 +333,19 @@ border-top: 1px solid white;
 
          
                 <div class="buysellvl">
-                    <div id="buyvl"><span id="buynote" value="0"></span></div>
+                    <div id="buyvl"><span id="buynote" class="greenside" value="0"></span></div>
                     <div id="bytsellline"><div id="toplinevl">0%</div></div>
                     <div class="middleline"></div>
-                    <div id="sellvl"><span id="sellnote" value="0"></span></div>
+                    <div id="sellvl"><span id="sellnote" class="redside" value="0"></span></div>
                 </div>
                 
                 <div class="buysellqty">
-                    <div id="buyqty"><span id="bqty" value="0"></span></div>
+                    <div id="buyqty"><span id="bqty" class="greenside"></span><div id="tanglen"></div></div>
                     <div id="bytsellline"><div id="toplineqty">0%</div></div>
                     <div class="middleline"></div>
-                    <div id="sellqty"><span id="sqty" value="0"></span></div>
+                    <div id="sellqty"><span id="sqty" class="redside"></span><div id="giamdi"></div></div>
                 </div>
-                <div class="holdtanggiam">
-                    <div id="tanglen"></div>
-                    <div id="giamdi"></div>
-                </div>
+               
          <table id="averan">
              <tr>
                  <td style="border-bottom: 1px solid green;text-align: center;"><b><div id="trungbinhmuavao"></div></b></td>
@@ -304,7 +354,7 @@ border-top: 1px solid white;
                 <tr>
                  <td>
                     <ul>
-                        <li><span class="dukien" id="dukien"></span>Predict</li>
+                        <li><span class="dukien" id="dukien"></span></li>
                         <li><span id="doimuatakeprofit"></span> - Buyer TP</li>
                         <li><span id="doimuastoploss"></span> - Buyer SL</li>
                     </ul>
@@ -439,7 +489,7 @@ border-top: 1px solid white;
         var giamua = document.getElementById("giamua").valueAsNumber;        
         var dtbrval = document.getElementById("dutinhban").valueAsNumber;
 
-        var dtbr = giamua + (giamua * dtbrval/100);
+        var dtbr = giamua + (giamua * (dtbrval+phigiamuonban+phimuavao)/100);
         document.getElementById('giadutinhban').innerHTML = dtbr.toFixed(3);
     
         var trigiasauban = taisan + (taisan * dtbrval/100) - (taisan *phigiamuonban/100) - (taisan *phimuavao/100);
@@ -450,7 +500,7 @@ border-top: 1px solid white;
         document.getElementById('loinhuanvnd').innerHTML = numberWithCommas(loinhuanvnd.toFixed());
                       // gia du tinh cat lo
         var dtclval = document.getElementById("dutinhcatlo").valueAsNumber;
-        var dtcl = giamua + (giamua * -dtclval/100);
+        var dtcl = giamua + (giamua * -(dtclval+phigiamuonban+phimuavao)/100);
         document.getElementById('giacatlo').innerHTML = dtcl.toFixed(3);
     
         var trigiasaucatlo = taisan - (taisan * dtclval/100) - (taisan * phigiamuonban/100) - (taisan *phimuavao/100);
@@ -525,7 +575,7 @@ border-top: 1px solid white;
 
 
 
-        document.getElementById('loinhuangiamuonbanphantram').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="percent">%</span>';
+        document.getElementById('loinhuangiamuonbanphantram').innerHTML = loinhuangiamuonbanphantram.toFixed(2) + '<span class="spsm">%</span>';
         var loinhuangiamuonban = taisan * loinhuangiamuonbanphantram/100;
         document.getElementById('loinhuangiamuonban').innerHTML = loinhuangiamuonban.toFixed(2);
         var loinhuangiamuonbanvnd = loinhuangiamuonban * tigia;
@@ -551,8 +601,8 @@ border-top: 1px solid white;
     var giamuonban = document.getElementById("giamuonban2").valueAsNumber;
     var phigiamuonban = document.getElementById("phigiamuonban").valueAsNumber;
     var chenhlechgiaban = giamuonban - giamua;
-document.getElementById('chenhlechgiaban2').innerHTML = chenhlechgiaban.toFixed(2);
-    var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - phigiamuonban - phimuavao;
+    document.getElementById('chenhlechgiaban2').innerHTML = chenhlechgiaban.toFixed(2);
+    var loinhuangiamuonbanphantram = (chenhlechgiaban/giamua) * 100 - (phigiamuonban + phimuavao);
         if (loinhuangiamuonbanphantram > 0){
             document.getElementById("livecal2").className = "green";
         }
@@ -764,6 +814,8 @@ function resetnote(){
     var muonstoploss = document.getElementById("dutinhcatlo").valueAsNumber;
     var phigiamua = document.getElementById("phigiamuonban").valueAsNumber;
     var phigiaban = document.getElementById("phimuavao").valueAsNumber;
+    let tangmenolen = document.getElementById("tanglen");
+    let giammenodi = document.getElementById("giamdi");
     function note(tinhtrang,qty,price){
         if (tinhtrang === '0'){ //0 = MUA VAO
             buy++;
@@ -777,8 +829,18 @@ function resetnote(){
             percentbqty = bqty/(bqty+sqty)*100;
             percentsqty = 100 - percentbqty;
             tangthem = percentbqty - bvlcuoi;
+            
+            
             document.getElementById("tanglen").innerHTML = '+' + tangthem.toFixed(3);
-    
+            if(tangmenolen.classList.contains('tanglen')){
+                tangmenolen.classList.add("tanglentiep");
+            }else{
+                tangmenolen.classList.add("tanglen");
+                giammenodi.classList.remove("giamdi");
+                giammenodi.classList.remove("giamditiep");
+            }
+          
+
 
             document.getElementById("toplinevl").innerHTML = (percentbqty - percentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
 
@@ -791,6 +853,10 @@ function resetnote(){
             giahomuonban = trungbinhgia + (trungbinhgia*(muonbanphantram + phigiaban + phigiamua )/100);
             giahomuonstoploss = trungbinhgia - (trungbinhgia*(muonstoploss + phigiaban + phigiamua)/100);
             document.getElementById("trungbinhmuavao").innerHTML = trungbinhgia.toFixed(4);
+           
+            trungbinhgiaban = prsvl/sell;
+            var dukien = (trungbinhgia + trungbinhgiaban)/2;
+            document.getElementById("dukien").innerHTML =  Number(dukien).toFixed(4);;
 
             document.getElementById("doimuatakeprofit").innerHTML = giahomuonban.toFixed(3);
             document.getElementById("doimuastoploss").innerHTML = giahomuonstoploss.toFixed(3);
@@ -812,8 +878,20 @@ function resetnote(){
 
 
             giamdi = spercentbqty - sellvlcuoi;
+            
+
+
+            if(giammenodi.classList.contains('giamdi')){
+                giammenodi.classList.add("giamditiep");
+            }else{
+                giammenodi.classList.add("giamdi");
+                tangmenolen.classList.remove("tanglen");
+                tangmenolen.classList.remove("tanglentiep");
+            }
             document.getElementById("giamdi").innerHTML = giamdi.toFixed(3);
+        
     
+
             document.getElementById("toplineqty").innerHTML = (spercentbqty - spercentsqty).toFixed(2) +' <span class="spsm">%</span></span>';
        
             document.getElementById("sqty").innerHTML = '<span class="smvlr">' + spercentsqty.toFixed(2) + ' <span class="spsm">%</span></span>' + sqty.toFixed(2);
@@ -827,6 +905,12 @@ function resetnote(){
             doibantakeprofit = giahodutinhmua + (trungbinhgiasell*(muonbanphantram + phigiaban + phigiamua)/100);
             doibanstoploss = giahodutinhmua - (trungbinhgiasell*(muonstoploss+ phigiaban + phigiamua)/100);
            
+
+            trungbinhgiamua = prbvl/buy;
+            dukien2 = (trungbinhgiamua + trungbinhgiasell)/2;
+            document.getElementById("dukien").innerHTML = Number(dukien2).toFixed(4);
+
+
             document.getElementById("trungbinhbanra").innerHTML = trungbinhgiasell.toFixed(4);
 
             document.getElementById("doibanmuonmua").innerHTML = giahodutinhmua.toFixed(3);
