@@ -298,7 +298,7 @@ padding-right: 10px;
               <option value="btc" selected="">BTC/USDT</option>
               <option value="eth" selected="">ETH/USDT</option>
               <option value="mana" selected="">LRC/USDT</option>
-              <option value="sand" selected="">SAND/USDT</option>
+              <option value="sand" selected="">SOL/USDT</option>
             </select>
           </form>
           
@@ -718,13 +718,13 @@ function checktemplate(){
         }
         if (cryptotext == '3'){
             cryptotextid.selectedIndex = cryptotext;
-            fire.innerHTML = 'SAND/USDT STOCK';
+            fire.innerHTML = 'SOL/USDT STOCK';
             if (taisansand != ""){document.getElementById("taisandangco").value = taisansand;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuasand != ""){document.getElementById("giamua").value = giamuasand;} else {document.getElementById("giamua").value = "0";}
             if (dutinhbansand != ""){document.getElementById("dutinhban").value = dutinhbansand;} else {document.getElementById("dutinhban").value = "1";}
             if (dutinhcatlosand != ""){document.getElementById("dutinhcatlo").value = dutinhcatlosand;} else {document.getElementById("dutinhcatlo").value = "0.7";}
 
-            console.log('SAND TEMPLATE - TOTAL: ' + taisansand + ' BOUGHT PRICE: ' + giamuasand);
+            console.log('SOL USDT TEMPLATE - TOTAL: ' + taisansand + ' BOUGHT PRICE: ' + giamuasand);
 
 
         }if (cryptotext === 'undefined') {
@@ -786,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             location.reload();
         }
         if (cryptvalue === "sand"){
-            let ws = "wss://stream.binance.com:9443/ws/sandusdt@trade";
+            let ws = "wss://stream.binance.com:9443/ws/solusdt@trade";
             setCookie('ws', ws , '365');
             setCookie('wstext', '3' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
@@ -1001,7 +1001,7 @@ function resetnote(){
                 livecal();
             }
     }
-    if (ws === 'wss://stream.binance.com:9443/ws/sandusdt@trade'){
+    if (ws === 'wss://stream.binance.com:9443/ws/solusdt@trade'){
         wsad.onmessage = (event) => {
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
