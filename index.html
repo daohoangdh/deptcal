@@ -271,12 +271,20 @@ padding-right: 10px;
           font-weight: bold;
           font-size: 16px;
       }
+      .btnreset{
+        width: 50px;
+height: 20px;
+background: #0408dd;
+border: 1px solid white;
+color: white;
+font-weight: bold;
+      }
     </style>
 </head>
 
 <body>
 
-    <div class="header" id="fire">BINANCE STOCK TRADE</div>
+    <div class="header" id="fire">BINANCE STOCK TRADE     <button class="btnreset" id="reset" onclick="resetnote()">RESET</button></div>
     <div class="headtext">
         <div class="sau1">
             Assets <input type="number" class="inputvua" id="taisandangco" value="100">
@@ -284,6 +292,7 @@ padding-right: 10px;
         </div>
         <div class="sau2">
             Bought Price <input type="number" class="inputgia" id="giamua">
+            
 
         </div>
 
