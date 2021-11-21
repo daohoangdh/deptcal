@@ -306,7 +306,7 @@ font-weight: bold;
             <select name="crypto" onchange="cryptochange(this)" id="cryptolist">
               <option value="btc" selected="">BTC/USDT</option>
               <option value="eth" selected="">ETH/USDT</option>
-              <option value="mana" selected="">LRC/USDT</option>
+              <option value="mana" selected="">GALA/USDT</option>
               <option value="sand" selected="">SOL/USDT</option>
             </select>
           </form>
@@ -715,7 +715,7 @@ function checktemplate(){
         }
         if (cryptotext == '2'){
            cryptotextid.selectedIndex = cryptotext;
-            fire.innerHTML = 'LRC/USDT STOCK';
+            fire.innerHTML = 'GALA/USDT STOCK';
             if (taisanmana != ""){document.getElementById("taisandangco").value = taisanmana;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuamana != ""){document.getElementById("giamua").value = giamuamana;} else {document.getElementById("giamua").value = "0";}
             if (dutinhbanmana != ""){document.getElementById("dutinhban").value = dutinhbanmana;} else {document.getElementById("dutinhban").value = "1";}
@@ -786,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             location.reload();        } 
         if (cryptvalue === "mana"){
-            let ws = "wss://stream.binance.com:9443/ws/lrcusdt@trade";
+            let ws = "wss://stream.binance.com:9443/ws/galausdt@trade";
             setCookie('ws', ws , '365');
             setCookie('wstext', '2' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
@@ -987,7 +987,7 @@ function resetnote(){
                 livecal();
             }
     }
-    if (ws === 'wss://stream.binance.com:9443/ws/lrcusdt@trade'){
+    if (ws === 'wss://stream.binance.com:9443/ws/galausdt@trade'){
         wsad.onmessage = (event) => {
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
