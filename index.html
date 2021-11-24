@@ -305,8 +305,8 @@ font-weight: bold;
             
             <select name="crypto" onchange="cryptochange(this)" id="cryptolist">
               <option value="btc" selected="">BTC/USDT</option>
-              <option value="eth" selected="">ETH/USDT</option>
-              <option value="mana" selected="">GALA/USDT</option>
+              <option value="eth" selected="">AMP/USDT</option>
+              <option value="mana" selected="">QI/USDT</option>
               <option value="sand" selected="">SOL/USDT</option>
             </select>
           </form>
@@ -704,7 +704,7 @@ function checktemplate(){
         }
         if (cryptotext == '1'){
             cryptotextid.selectedIndex = cryptotext;
-            fire.innerHTML = 'ETH/USDT STOCK';
+            fire.innerHTML = 'AMP/USDT STOCK';
             if (taisaneth != ""){document.getElementById("taisandangco").value = taisaneth;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuaeth != ""){document.getElementById("giamua").value = giamuaeth;} else {document.getElementById("giamua").value = "0";}
             if (dutinhbaneth != ""){document.getElementById("dutinhban").value = dutinhbaneth;} else {document.getElementById("dutinhban").value = "1";}
@@ -715,13 +715,13 @@ function checktemplate(){
         }
         if (cryptotext == '2'){
            cryptotextid.selectedIndex = cryptotext;
-            fire.innerHTML = 'GALA/USDT STOCK';
+            fire.innerHTML = 'QI/USDT STOCK';
             if (taisanmana != ""){document.getElementById("taisandangco").value = taisanmana;} else {document.getElementById("taisandangco").value = "0";}
             if (giamuamana != ""){document.getElementById("giamua").value = giamuamana;} else {document.getElementById("giamua").value = "0";}
             if (dutinhbanmana != ""){document.getElementById("dutinhban").value = dutinhbanmana;} else {document.getElementById("dutinhban").value = "1";}
             if (dutinhcatlomana != ""){document.getElementById("dutinhcatlo").value = dutinhcatlomana;} else {document.getElementById("dutinhcatlo").value = "0.7";}
 
-            console.log('LRC TEMPLATE - TOTAL: ' + taisanmana + ' BOUGHT PRICE: ' + giamuamana);
+            console.log('QI TEMPLATE - TOTAL: ' + taisanmana + ' BOUGHT PRICE: ' + giamuamana);
 
 
         }
@@ -778,7 +778,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             location.reload();            
         }
         if (cryptvalue === "eth"){
-            let ws = "wss://stream.binance.com:9443/ws/ethusdt@trade";
+            let ws = "wss://stream.binance.com:9443/ws/ampusdt@trade";
             setCookie('ws', ws , '365');
             setCookie('wstext', '1' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
@@ -786,7 +786,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             location.reload();        } 
         if (cryptvalue === "mana"){
-            let ws = "wss://stream.binance.com:9443/ws/galausdt@trade";
+            let ws = "wss://stream.binance.com:9443/ws/qiusdt@trade";
             setCookie('ws', ws , '365');
             setCookie('wstext', '2' , '365');
             console.log('Websocket change: ' + getCookie('ws'));
@@ -964,11 +964,11 @@ function resetnote(){
                 livecal();
             }
     }
-    if (ws === 'wss://stream.binance.com:9443/ws/ethusdt@trade'){
+    if (ws === 'wss://stream.binance.com:9443/ws/ampusdt@trade'){
         wsad.onmessage = (event) => {
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
-                let price = parseFloat(ethval).toFixed(2);
+                let price = parseFloat(ethval).toFixed(5);
                 let quantity = stockObject.q;
 
                 etherprice.innerHTML = price;   
@@ -987,7 +987,7 @@ function resetnote(){
                 livecal();
             }
     }
-    if (ws === 'wss://stream.binance.com:9443/ws/galausdt@trade'){
+    if (ws === 'wss://stream.binance.com:9443/ws/qiusdt@trade'){
         wsad.onmessage = (event) => {
                 let stockObject = JSON.parse(event.data);
                 let ethval = stockObject.p;
